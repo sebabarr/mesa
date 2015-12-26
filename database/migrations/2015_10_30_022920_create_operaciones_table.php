@@ -20,8 +20,8 @@ class CreateOperacionesTable extends Migration {
 			$table->string('vendedor',20);
 			$table->enum('tipo_mov',['compra','venta','aporte','retiro']);
 			$table->decimal('cotizacion',5,2);
+			$table->decimal('cantidad',10,2);
 			$table->decimal('importe',10,2);
-			
 			$table->timestamps();
 			
 		});

@@ -20,6 +20,6 @@
 	{!! Form::input('number','cotizacion',null,['class'=>'form-control','step'=>"0.01",'min'=>"0.00",'max'=>'99999999.99',"id"=>"cot"]) !!}
 </div>
 <div>
-	{!! Form::label('importe','Importe') !!}
-	{!! Form::input('number','importe',null,['class'=>'form-control','step'=>"0.01","id"=>"imp" ]) !!}
+	{!! Form::label('cantidad','Cantidad') !!}
+	{!! Form::input('number','cantidad',null,['class'=>'form-control','step'=>"0.01","id"=>"can" ]) !!}
 </div>

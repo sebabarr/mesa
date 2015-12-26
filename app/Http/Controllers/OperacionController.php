@@ -43,10 +43,8 @@ class OperacionController extends Controller {
 		$total_dolar=$dolar->sum("importe");
 		$total_euro=$euro->sum("importe");
 		$total_real=$real->sum("importe");
-		//dd($total_dolar);
-		//dd($total_euro);
-		//dd($total_real);
-		return view('operaciones.opindex',compact('operaciones','total_dolar','total_euro','total_real'));
+		$total_pesos=$oper->sum('importe');
+		return view('operaciones.opindex',compact('operaciones','total_dolar','total_euro','total_real','total_pesos'));
 	}
 
 	/**
@@ -69,14 +67,24 @@ class OperacionController extends Controller {
 		$reglas=array('moneda'=>'required',
 					  'tipo_mov'=>'required',
 					  'cotizacion'=>'numeric',
-					  'importe'=>'numeric');
+					  'cantidad'=>'numeric');
 		$this->validate($request,$reglas);
 		$nuevo= new Operacion($request->all());
-		if ($nuevo->tipo_mov=="retiro" or $nuevo->tipo_mov=="venta") {
-			$nuevo->importe=$nuevo->importe*(-1);
+		if ($nuevo->tipo_mov=="retiro") {
+			$nuevo->cantidad=$nuevo->cantidad*(-1);
+			$nuevo->importe=0.00;
 		}
 		if ($nuevo->tipo_mov=="retiro" or $nuevo->tipo_mov=="aporte") {
 			$nuevo->cotizacion=0.00;
+			$nuevo->importe=0.00;
+		}
+		if ($nuevo->tipo_mov=="compra") {
+			$nuevo->importe=$nuevo->cantidad*$nuevo->cotizacion*(-1);
+		}
+		if ($nuevo->tipo_mov=="venta") {
+			$nuevo->importe= $nuevo->cantidad*$nuevo->cotizacion;
+			$nuevo->cantidad=$nuevo->cantidad*(-1);
+			
 		}
 		$nuevo->save();
 		return \Redirect::route('operacion.index');
@@ -114,20 +122,30 @@ class OperacionController extends Controller {
 	 */
 	public function update(Request $request,$id)
 	{
-		$operacion=Operacion::FindOrFail($id);
+		$nuevo=Operacion::FindOrFail($id);
 		$reglas=array('tipo_mov'=>'required',
 					  'cotizacion'=>'numeric',
 					  'moneda'=>'required',
-					  'importe'=>'numeric');
+					  'cantidad'=>'numeric');
 		$this->validate($request,$reglas);
-		$operacion->fill(\Request::all());
-		if ($operacion->tipo_mov=="retiro" or $operacion->tipo_mov=="venta") {
-			$operacion->importe=$operacion->importe*(-1);
+		$nuevo->fill(\Request::all());
+		if ($nuevo->tipo_mov=="retiro") {
+			$nuevo->cantidad=$nuevo->cantidad*(-1);
+			$nuevo->importe=0.00;
 		}
-		if ($operacion->tipo_mov=="retiro" or $operacion->tipo_mov=="aporte") {
-			$operacion->cotizacion=0.00;
+		if ($nuevo->tipo_mov=="retiro" or $nuevo->tipo_mov=="aporte") {
+			$nuevo->cotizacion=0.00;
+			$nuevo->importe=0.00;
 		}
-		$operacion->save();
+		if ($nuevo->tipo_mov=="compra") {
+			$nuevo->importe=$nuevo->cantidad*$nuevo->cotizacion*(-1);
+		}
+		if ($nuevo->tipo_mov=="venta") {
+			$nuevo->importe= $nuevo->cantidad*$nuevo->cotizacion;
+			$nuevo->cantidad=$nuevo->cantidad*(-1);
+			
+		}
+		$nuevo->save();
 		return \Redirect::route('operacion.index');
 	}
 

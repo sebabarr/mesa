@@ -20,7 +20,7 @@ class Operacion extends Model  {
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['moneda','comprador','vendedor', 'tipo_mov', 'cotizacion','importe','monto'];
+	protected $fillable = ['moneda','comprador','vendedor', 'tipo_mov', 'cotizacion','cantidad','importe','monto'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.

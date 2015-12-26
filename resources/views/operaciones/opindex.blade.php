@@ -16,17 +16,20 @@
 
 				<div class="panel-body">
 					<div class="row">
-						<div class="col-md-3">
+						<div class="col-md-2">
 							<a class='btn btn-info' href="{{ route('operacion.create') }}" role='button'>Nueva Operacion</a>
 						</div>
-						<div class="col-md-3">
-							<h4 class="text-info">Saldo U$S: {{ number_format($total_dolar, 2, ",", ".") }}</h4>
+						<div class="col-md-2">
+							<h4 class="text-info">U$S: {{ number_format($total_dolar, 2, ",", ".") }}</h4>
 						</div>
-						<div class="col-md-3">
-							<h4 class="text-info">Saldo Euro: {{ number_format($total_euro, 2, ",", ".") }}</h4>
+						<div class="col-md-2">
+							<h4 class="text-info">Euro: {{ number_format($total_euro, 2, ",", ".") }}</h4>
 						</div>
-						<div class="col-md-3">
-							<h4 class="text-info">Saldo Real: {{ number_format($total_real, 2, ",", ".") }}</h4>
+						<div class="col-md-2">
+							<h4 class="text-info">Real: {{ number_format($total_real, 2, ",", ".") }}</h4>
+						</div>
+						<div class="col-md-2">
+							<h4 class="text-info">Pesos: {{ number_format($total_pesos, 2, ",", ".") }}</h4>
 						</div>
 							<!--{!! Form::open(['route'=>'operacion.index','method'=>'GET','class'=>'navbar-form navbar-left pull-right','role'=>'search']) !!}	
 			  					<div class="form-group">
@@ -44,6 +47,7 @@
         				        <th>Vendedor</th>
         				        <th>Movimiento</th>
         				        <th>Cotizacion</th>
+        				        <th>Cantidad</th>
         				        <th>Importe</th>
         				        <th>Fecha y hora</th>
         				        <th>Acciones</th>
@@ -57,6 +61,7 @@
         				        <td>{{ $ope->vendedor }}</td>
         				        <td>{{ $ope->tipo_mov }}</td>
         				        <td>{{ number_format($ope->cotizacion, 2, ",", ".") }}</td>
+        				        <td>{{ number_format($ope->cantidad, 2, ",", ".") }}</td>
         				        <td>{{ number_format($ope->importe, 2, ",", ".") }}</td>
         				        <td>{{ $ope->created_at }}</td>
         				        <td>

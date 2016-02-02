@@ -25,3 +25,11 @@ Route::group( ['prefix'=> 'Admin','middleware'=>'auth','namespace'=>'Admin'], fu
 	Route::resource('user','UserController');
 	
 });
+
+
+
+
+Route::resource('cuits', 'CuitsController');
+Route::resource('clientes','ClientesController');
+Route::resource('concepto', 'ConceptoController');
+Route::resource('movimientos', 'MovimientosController');

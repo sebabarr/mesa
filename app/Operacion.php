@@ -20,7 +20,7 @@ class Operacion extends Model  {
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['moneda','comprador','vendedor', 'tipo_mov', 'cotizacion','cantidad','importe','monto'];
+	protected $fillable = ['moneda','tipo_mov', 'cotizacion','cantidad','importe','cliente_id'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -37,4 +37,7 @@ class Operacion extends Model  {
 	
 */	
 
+	public function clientes(){
+		return $this->belongsTo('course\Cliente','cliente_id','id');
+	}
 }

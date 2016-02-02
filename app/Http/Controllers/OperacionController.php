@@ -4,6 +4,8 @@ use course\Http\Requests;
 use course\Http\Controllers\Controller;
 use course\Operacion;
 use Illuminate\Http\Request;
+use course\Cliente;
+use course\Movimiento;
 
 class OperacionController extends Controller {
 
@@ -40,9 +42,9 @@ class OperacionController extends Controller {
 
 		
 		
-		$total_dolar=$dolar->sum("importe");
-		$total_euro=$euro->sum("importe");
-		$total_real=$real->sum("importe");
+		$total_dolar=$dolar->sum("cantidad");
+		$total_euro=$euro->sum("cantidad");
+		$total_real=$real->sum("cantidad");
 		$total_pesos=$oper->sum('importe');
 		return view('operaciones.opindex',compact('operaciones','total_dolar','total_euro','total_real','total_pesos'));
 	}
@@ -54,7 +56,8 @@ class OperacionController extends Controller {
 	 */
 	public function create()
 	{
-		return view('operaciones.opcreate');
+		$cliente=Cliente::lists('razonsocial','id');
+		return view('operaciones.opcreate',compact('cliente'));
 	}
 
 	/**
@@ -64,12 +67,16 @@ class OperacionController extends Controller {
 	 */
 	public function store(Request $request)
 	{
+		
 		$reglas=array('moneda'=>'required',
 					  'tipo_mov'=>'required',
 					  'cotizacion'=>'numeric',
+					  'cliente_id'=>'required',
 					  'cantidad'=>'numeric');
 		$this->validate($request,$reglas);
 		$nuevo= new Operacion($request->all());
+		$nuevo_mov= new Movimiento();
+		$comen=$nuevo->tipo_mov."-".$nuevo->moneda."-".$nuevo->cantidad."*$".$nuevo->cotizacion;
 		if ($nuevo->tipo_mov=="retiro") {
 			$nuevo->cantidad=$nuevo->cantidad*(-1);
 			$nuevo->importe=0.00;
@@ -80,13 +87,24 @@ class OperacionController extends Controller {
 		}
 		if ($nuevo->tipo_mov=="compra") {
 			$nuevo->importe=$nuevo->cantidad*$nuevo->cotizacion*(-1);
+			$nuevo_mov->concepto_id=4;
+			$nuevo_mov->comentario=$comen;
+			$nuevo_mov->importe=$nuevo->importe;
 		}
 		if ($nuevo->tipo_mov=="venta") {
 			$nuevo->importe= $nuevo->cantidad*$nuevo->cotizacion;
 			$nuevo->cantidad=$nuevo->cantidad*(-1);
+			$nuevo_mov->concepto_id=5;
+			$nuevo_mov->comentario=$comen;
+			$nuevo_mov->importe=$nuevo->importe;					
 			
 		}
+		
+		
 		$nuevo->save();
+		$nuevo_mov->operacion_id=$nuevo->id;
+		$nuevo_mov->save();
+		
 		return \Redirect::route('operacion.index');
 		
 	}
@@ -111,7 +129,8 @@ class OperacionController extends Controller {
 	public function edit($id)
 	{
 		$operacion=Operacion::FindOrFail($id);
-		return view('operaciones.opedit',compact('operacion'));
+		$cliente=Cliente::lists('razonsocial','id');
+		return view('operaciones.opedit',compact('operacion','cliente'));
 	}
 
 	/**

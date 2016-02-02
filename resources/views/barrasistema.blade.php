@@ -19,10 +19,13 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Operaciones <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="{{ route('Admin.user.index') }}">Usuarios</a></li>
+            <li><a href="{{ route('cuits.index') }}">Cuits</a></li>
+            <li><a href="{{ route('clientes.index') }}">Clientes</a></li>
+            <li><a href="{{ route('concepto.index') }}">Conceptos de Caja</a></li>
             <li><a href="{{ route('operacion.index') }}">Operaciones de Moneda</a></li>
             <li><a href="#">Operaciones de Cheques</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
+            <li><a href="{{ route('movimientos.index') }}">Movimientos de Caja</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#">One more separated link</a></li>
           </ul>

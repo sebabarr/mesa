@@ -43,8 +43,8 @@
         				    <tr>
         				        <th>#</th>
         				        <th>Moneda</th>
-        				        <th>Comprador</th>
-        				        <th>Vendedor</th>
+        				        <th>Contraparte</th>
+        				        
         				        <th>Movimiento</th>
         				        <th>Cotizacion</th>
         				        <th>Cantidad</th>
@@ -57,8 +57,8 @@
         				    <tr>
         				        <td>{{ $ope->id }}</td>
         				        <td>{{ $ope->moneda }}</td>
-        				        <td>{{ $ope->comprador }}</td>
-        				        <td>{{ $ope->vendedor }}</td>
+        				        <td>{{ $ope->clientes->razonsocial }}</td>
+        				        
         				        <td>{{ $ope->tipo_mov }}</td>
         				        <td>{{ number_format($ope->cotizacion, 2, ",", ".") }}</td>
         				        <td>{{ number_format($ope->cantidad, 2, ",", ".") }}</td>

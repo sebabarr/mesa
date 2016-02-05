@@ -138,6 +138,7 @@ return [
 		Appzcoder\CrudGenerator\CrudGeneratorServiceProvider::class,
 		Laracasts\Flash\FlashServiceProvider::class,
 		Collective\Html\HtmlServiceProvider::class,
+		'Laracasts\Generators\GeneratorsServiceProvider'
 		
 		
 		/*

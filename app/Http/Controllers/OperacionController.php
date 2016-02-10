@@ -102,9 +102,10 @@ class OperacionController extends Controller {
 		
 		
 		$nuevo->save();
-		$nuevo_mov->operacion_id=$nuevo->id;
-		$nuevo_mov->save();
-		
+		if ($nuevo->tipo_mov=='compra' or $nuevo->tipo_mov=='venta'){
+			$nuevo_mov->operacion_id=$nuevo->id;
+			$nuevo_mov->save();
+		}
 		return \Redirect::route('operacion.index');
 		
 	}
@@ -178,6 +179,7 @@ class OperacionController extends Controller {
 	{
 		$operacion=Operacion::FindOrFail($id);
 		$operacion->delete();
+		$delmov = $operacion->movimientos()->delete();
 		\Session::Flash('message','La Operacion fue eliminada');
 		return redirect()->route('operacion.index');
 	}

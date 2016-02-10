@@ -2,13 +2,20 @@
 @extends('home')
 
 @section('contenido')
-
-    <h1>Movimientos <a href="{{ url('movimientos/create') }}" class="btn btn-primary pull-right btn-sm">Add New Movimiento</a></h1>
+    <div class='col-md-4'>
+        <h1>Movimientos</h1>
+    </div>    
+    <div class="col-md-4">    
+        <h2><a>Saldo: </a><a>{{ $saldo }}</a></h2>
+    </div>    
+    <div class="col-md-4">
+        <a href="{{ url('movimientos/create') }}" class="btn btn-primary pull-right btn-sm">Add New Movimiento</a></h1>
+    </div>
     <div class="table">
         <table class="table table-bordered table-striped table-hover">
             <thead>
                 <tr>
-                    <th>S.No</th><th>Concepto Id</th><th>Comentario</th><th>Importe</th><th>Actions</th>
+                    <th>S.No</th><th>Concepto Id</th><th>Comentario</th><th>Importe</th><th>Operacion id</th><th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -17,7 +24,7 @@
                 {{-- */$x++;/* --}}
                 <tr>
                     <td>{{ $x }}</td>
-                    <td><a href="{{ url('movimientos', $item->id) }}">{{ $item->conceptos->concepto }}</a></td><td>{{ $item->comentario }}</td><td>{{ $item->importe }}</td>
+                    <td><a href="{{ url('movimientos', $item->id) }}">{{ $item->conceptos->concepto }}</a></td><td>{{ $item->comentario }}</td><td>{{ $item->importe }}</td><td>{{ $item->operacion_id }}</td>
                     <td>
                         <a href="{{ url('movimientos/' . $item->id . '/edit') }}">
                             <button type="submit" class="btn btn-primary btn-xs">Update</button>
@@ -34,7 +41,8 @@
             @endforeach
             </tbody>
         </table>
-        <div class="pagination"> {!! $movimientos->render() !!} </div>
+        <div class="pagination"> {!! $movimientos->setPath('')->render() !!} </div>
     </div>
 
 @endsection
+

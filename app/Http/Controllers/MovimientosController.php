@@ -21,8 +21,9 @@ class MovimientosController extends Controller
     public function index()
     {
         $movimientos = Movimiento::paginate(10);
-
-        return view('movimientos.index', compact('movimientos'));
+        $saldo=Movimiento::sum('importe');
+        
+        return view('movimientos.index', compact('movimientos','saldo'));
     }
 
     /**

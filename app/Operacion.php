@@ -36,6 +36,9 @@ class Operacion extends Model  {
 	}	
 	
 */	
+	public function movimientos(){
+		return $this->hasOne('course\Movimiento','operacion_id','id');
+	}
 
 	public function clientes(){
 		return $this->belongsTo('course\Cliente','cliente_id','id');

@@ -26,7 +26,7 @@ class AddFkMovimientos extends Migration
     public function down()
     {
         Schema::table('movimientos', function (Blueprint $table) {
-            //
+            $table->dropForeign('movimientos_concepto_id_foreign');
         });
     }
 }

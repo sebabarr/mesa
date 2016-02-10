@@ -24,4 +24,7 @@ class Movimiento extends Model
     public function conceptos(){
         return $this->belongsTo('course\Concepto','concepto_id','id');
     }
+    public function operaciones(){
+        return $this->belongsTo('course\Operacion','operacion_id','id');
+    }
 }

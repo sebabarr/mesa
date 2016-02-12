@@ -15,7 +15,13 @@
         <table class="table table-bordered table-striped table-hover">
             <thead>
                 <tr>
-                    <th>S.No</th><th>Concepto Id</th><th>Comentario</th><th>Importe</th><th>Operacion id</th><th>Actions</th>
+                    <th>S.No</th>
+                    <th>Concepto Id</th>
+                    <th>Comentario</th>
+                    <th>Importe</th>
+                    <th>Fecha</th>
+                    <th>Operacion id</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -24,7 +30,11 @@
                 {{-- */$x++;/* --}}
                 <tr>
                     <td>{{ $x }}</td>
-                    <td><a href="{{ url('movimientos', $item->id) }}">{{ $item->conceptos->concepto }}</a></td><td>{{ $item->comentario }}</td><td>{{ $item->importe }}</td><td>{{ $item->operacion_id }}</td>
+                    <td><a href="{{ url('movimientos', $item->id) }}">{{ $item->conceptos->concepto }}</a></td>
+                    <td>{{ $item->comentario }}</td>
+                    <td>{{ $item->importe }}</td>
+                    <td>{{ $item->created_at }}</td>
+                    <td>{{ $item->operacion_id }}</td>
                     <td>
                         <a href="{{ url('movimientos/' . $item->id . '/edit') }}">
                             <button type="submit" class="btn btn-primary btn-xs">Update</button>

@@ -20,7 +20,7 @@ class MovimientosController extends Controller
      */
     public function index()
     {
-        $movimientos = Movimiento::paginate(10);
+        $movimientos = Movimiento::orderBy('created_at','desc')->paginate(10);
         $saldo=Movimiento::sum('importe');
         
         return view('movimientos.index', compact('movimientos','saldo'));

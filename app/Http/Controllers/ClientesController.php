@@ -45,7 +45,7 @@ class ClientesController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, ['razonsocial' => 'required', ]);
+        $this->validate($request, ['razonsocial' => 'required|unique:clientes', ]);
 
         Cliente::create($request->all());
 

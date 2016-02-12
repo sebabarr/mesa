@@ -46,7 +46,7 @@ class CuitsController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, ['razonsocial' => 'required', ]);
+        $this->validate($request, ['razonsocial' => 'required|unique:cuits,razonsocial', ]);
 
         Cuit::create($request->all());
         

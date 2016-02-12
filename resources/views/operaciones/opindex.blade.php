@@ -21,7 +21,7 @@
 						</div>
 						<div class="col-md-2">
 							<h4 class="text-info">U$S: {{ number_format($total_dolar, 2, ",", ".") }}</h4>
-							<h5>{{ 'PC: $'.$pc.'--PV: $'.$pv}}</h5>
+							<h5>{{ 'PC: $'.$dolcompras.'--PV: $'.$dolventas }}</h5>
 						</div>
 						<div class="col-md-2">
 							<h4 class="text-info">Euro: {{ number_format($total_euro, 2, ",", ".") }}</h4>

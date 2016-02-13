@@ -23,61 +23,105 @@ class OperacionController extends Controller {
 		$operaciones=Operacion::orderBy('created_at',"desc")->paginate(5);
 		$oper=Operacion::all();
 		
-		$dolar = $oper->filter(function($op) {
-    		if ($op->moneda == 'Dolar') {
-    			return true;
-    		}
- 		});
- 		$euro = $oper->filter(function($op) {
-    		if ($op->moneda == 'Euro') {
-    			return true;
-    		}
- 		});
- 		$real = $oper->filter(function($op) {
-    		if ($op->moneda == 'Real') {
-    			return true;
-    		}
- 		});
- 
+		$dolar = $oper->where('moneda','Dolar');
+		
+ 		$euro = $oper->where('moneda','Euro');
 
-		
-		
+ 		$real = $oper->where('moneda','Real');
+ 		
+ 		
 		$total_dolar=$dolar->sum("cantidad");
+		
 		//promedio ponderado
-			global $tot_dolcompras; 
-			$nuevadolar=$dolar;
-			$tot_dolcompras=$nuevadolar->where('tipo_mov','compra')->sum('cotizacion');
+			global $tot_dolcompras,$tot_dolventas,$tot_eurocompras,$tot_euroventas,$tot_realcompras,$tot_realventas; 
 			
-			$nuevacole=$nuevadolar->map(function ($item, $key) {
+			$dolarcompras=$dolar->where('tipo_mov','compra');
+			$dolarventas=$dolar->where('tipo_mov','venta');
+			
+			$tot_dolcompras=$dolarcompras->sum('cantidad');
+			$tot_dolventas=abs($dolarventas->sum('cantidad'));
+		
+			$nuevacolecompra=$dolarcompras->map(function ($item, $key) {
 				global $tot_dolcompras;
 				
-				$item['cotizacion'] = (abs($item['cantidad'])/$tot_dolcompras) * $item['cotizacion'];
+				$item['cotizacion'] = (abs($item['cantidad'])/$tot_dolcompras)*$item['cotizacion'];
 				
 			   return $item ;
 			});
-			dd($nuevacole);
-			$prom_dolcompras=$nuevacole->where('tipo_mov','compra')->avg('cotizacion');
-		//
+			$nuevacoleventa=$dolarventas->map(function ($item, $key) {
+				global $tot_dolventas;
+				
+				$item['cotizacion'] = (abs($item['cantidad'])/$tot_dolventas)*$item['cotizacion'];
+				
+			   return $item ;
+			});
+			$prom_dolcompras=$nuevacolecompra->sum('cotizacion');
+			$prom_dolventas=$nuevacoleventa->sum('cotizacion');
+
+		//fin promedio dolar
 		
-		//Sacar Promedio
-			$dolcompras=$dolar->where('tipo_mov','compra')->avg('cotizacion');
-			$dolventas=$dolar->where('tipo_mov','venta')->avg('cotizacion');
-		//fin promedio dolar
 		$total_euro=$euro->sum("cantidad");
-		//Sacar Promedio
-			$eurcompras=$euro->where('tipo_mov','compra')->avg('cotizacion');
-			$eurventas=$euro->where('tipo_mov','venta')->avg('cotizacion');
-		//fin promedio dolar
+		//Sacar Promedio euro
+			
+			$eurocompras=$euro->where('tipo_mov','compra');
+			$euroventas=$euro->where('tipo_mov','venta');
+			
+			
+			$tot_eurocompras=$eurocompras->sum('cantidad');
+			$tot_euroventas=abs($euroventas->sum('cantidad'));
+			
+			$nuevacolecompra=$eurocompras->map(function ($item, $key) {
+				global $tot_eurocompras;
+				
+				$item['cotizacion'] = (abs($item['cantidad'])/$tot_eurocompras)*$item['cotizacion'];
+				
+			   return $item ;
+			});
+			$nuevacoleventa=$euroventas->map(function ($item, $key) {
+				global $tot_euroventas;
+				
+				$item['cotizacion'] = (abs($item['cantidad'])/$tot_euroventas)*$item['cotizacion'];
+				
+			   return $item ;
+			});
+			$prom_eurocompras=$nuevacolecompra->sum('cotizacion');
+			$prom_euroventas=$nuevacoleventa->sum('cotizacion');
+		
+
+		//fin promedio euro
 		
 		$total_real=$real->sum("cantidad");
 		//Sacar Promedio
-			$realcompras=$real->where('tipo_mov','compra')->avg('cotizacion');
-			$realventas=$real->where('tipo_mov','venta')->avg('cotizacion');
-		//fin promedio dolar
+			$realcompras=$real->where('tipo_mov','compra');
+			$realventas=$real->where('tipo_mov','venta');
+			
+			
+			$tot_realcompras=$realcompras->sum('cantidad');
+			$tot_realventas=abs($realventas->sum('cantidad'));
+			
+			$nuevacolecompra=$realcompras->map(function ($item, $key) {
+				global $tot_realcompras;
+				
+				$item['cotizacion'] = (abs($item['cantidad'])/$tot_realcompras)*$item['cotizacion'];
+				
+			   return $item ;
+			});
+			$nuevacoleventa=$realventas->map(function ($item, $key) {
+				global $tot_realventas;
+				
+				$item['cotizacion'] = (abs($item['cantidad'])/$tot_realventas)*$item['cotizacion'];
+				
+			   return $item ;
+			});
+			$prom_realcompras=$nuevacolecompra->sum('cotizacion');
+			$prom_realventas=$nuevacoleventa->sum('cotizacion');
+		
+
+		//fin promedio real
 		
 		$total_pesos=$oper->sum('importe');
-		return view('operaciones.opindex',compact('operaciones','total_dolar','total_euro','total_real','total_pesos','dolcompras','dolventas','eurcompras',
-					'eurventas','realcompras','realventas','prom_dolcompras'));
+		return view('operaciones.opindex',compact('operaciones','total_dolar','total_euro','total_real','total_pesos','prom_eurocompras',
+					'prom_euroventas','prom_realcompras','prom_realventas','prom_dolcompras','prom_dolventas'));
 	}
 
 	/**

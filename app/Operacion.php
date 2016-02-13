@@ -36,6 +36,11 @@ class Operacion extends Model  {
 	}	
 	
 */	
+//	protected $attributes = ['cotipon'];
+	
+	//Make it available in the json response
+//	protected $appends = ['cotipon'];
+
 	public function movimientos(){
 		return $this->hasOne('course\Movimiento','operacion_id','id');
 	}
@@ -43,4 +48,6 @@ class Operacion extends Model  {
 	public function clientes(){
 		return $this->belongsTo('course\Cliente','cliente_id','id');
 	}
+	
+
 }

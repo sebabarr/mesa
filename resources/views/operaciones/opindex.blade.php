@@ -21,21 +21,20 @@
 						</div>
 						<div class="col-md-2">
 							<h4 class="text-info">U$S: {{ number_format($total_dolar, 2, ",", ".") }}</h4>
-							<h5>PC: $ {{ number_format($dolcompras,2,",", ".") }}</h5>
-							<h5>PV: $ {{ number_format($dolventas,2,",", ".") }} </h5>
-							<h5>rr {{ $prom_dolcompras }}</h5>
+							<h5>PC: $ {{ number_format($prom_dolcompras,2,",", ".") }}</h5>
+							<h5>PV: $ {{ number_format($prom_dolventas,2,",", ".") }} </h5>
 							
 						</div>
 						<div class="col-md-2">
 							<h4 class="text-info">Euro: {{ number_format($total_euro, 2, ",", ".") }}</h4>
-							<h5>PC: $ {{ number_format($eurcompras,2,",", ".") }}</h5>
-							<h5>PV: $ {{ number_format($eurventas,2,",", ".") }} </h5>
+							<h5>PC: $ {{ number_format($prom_eurocompras,2,",", ".") }}</h5>
+							<h5>PV: $ {{ number_format($prom_euroventas,2,",", ".") }} </h5>
 
 						</div>
 						<div class="col-md-2">
 							<h4 class="text-info">Real: {{ number_format($total_real, 2, ",", ".") }}</h4>
-							<h5>PC: $ {{ number_format($realcompras,2,",", ".") }}</h5>
-							<h5>PV: $ {{ number_format($realventas,2,",", ".") }} </h5>
+							<h5>PC: $ {{ number_format($prom_realcompras,2,",", ".") }}</h5>
+							<h5>PV: $ {{ number_format($prom_realventas,2,",", ".") }} </h5>
 
 						</div>
 						<div class="col-md-2">

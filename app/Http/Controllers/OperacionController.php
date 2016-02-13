@@ -45,18 +45,20 @@ class OperacionController extends Controller {
 		$total_dolar=$dolar->sum("cantidad");
 		//promedio ponderado
 			global $tot_dolcompras; 
-			$tot_dolcompras=$dolar->where('tipo_mov','compra')->sum('cotizacion');
+			$nuevadolar=$dolar;
+			$tot_dolcompras=$nuevadolar->where('tipo_mov','compra')->sum('cotizacion');
 			
-			$nuevacole=$dolar->map(function ($item, $key) {
+			$nuevacole=$nuevadolar->map(function ($item, $key) {
 				global $tot_dolcompras;
 				
 				$item['cotizacion'] = (abs($item['cantidad'])/$tot_dolcompras) * $item['cotizacion'];
 				
 			   return $item ;
 			});
-			
+			dd($nuevacole);
 			$prom_dolcompras=$nuevacole->where('tipo_mov','compra')->avg('cotizacion');
 		//
+		
 		//Sacar Promedio
 			$dolcompras=$dolar->where('tipo_mov','compra')->avg('cotizacion');
 			$dolventas=$dolar->where('tipo_mov','venta')->avg('cotizacion');

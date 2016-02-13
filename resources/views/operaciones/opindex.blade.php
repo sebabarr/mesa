@@ -21,13 +21,21 @@
 						</div>
 						<div class="col-md-2">
 							<h4 class="text-info">U$S: {{ number_format($total_dolar, 2, ",", ".") }}</h4>
-							<h5>{{ 'PC: $'.$dolcompras.'--PV: $'.$dolventas }}</h5>
+							<h5>PC: $ {{ number_format($dolcompras,2,",", ".") }}</h5>
+							<h5>PV: $ {{ number_format($dolventas,2,",", ".") }} </h5>
+							
 						</div>
 						<div class="col-md-2">
 							<h4 class="text-info">Euro: {{ number_format($total_euro, 2, ",", ".") }}</h4>
+							<h5>PC: $ {{ number_format($eurcompras,2,",", ".") }}</h5>
+							<h5>PV: $ {{ number_format($eurventas,2,",", ".") }} </h5>
+
 						</div>
 						<div class="col-md-2">
 							<h4 class="text-info">Real: {{ number_format($total_real, 2, ",", ".") }}</h4>
+							<h5>PC: $ {{ number_format($realcompras,2,",", ".") }}</h5>
+							<h5>PV: $ {{ number_format($realventas,2,",", ".") }} </h5>
+
 						</div>
 						<div class="col-md-2">
 							<h4 class="text-info">Pesos: {{ number_format($total_pesos, 2, ",", ".") }}</h4>

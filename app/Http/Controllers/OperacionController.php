@@ -44,18 +44,24 @@ class OperacionController extends Controller {
 		
 		$total_dolar=$dolar->sum("cantidad");
 		//Sacar Promedio
-			$noper=$dolar->count();
 			$dolcompras=$dolar->where('tipo_mov','compra')->avg('cotizacion');
-		//	$pc=$dolcompras/$noper;
-			
 			$dolventas=$dolar->where('tipo_mov','venta')->avg('cotizacion');
-		//	$pv=$dolventas/$noper;
-			
 		//fin promedio dolar
 		$total_euro=$euro->sum("cantidad");
+		//Sacar Promedio
+			$eurcompras=$euro->where('tipo_mov','compra')->avg('cotizacion');
+			$eurventas=$euro->where('tipo_mov','venta')->avg('cotizacion');
+		//fin promedio dolar
+		
 		$total_real=$real->sum("cantidad");
+		//Sacar Promedio
+			$realcompras=$real->where('tipo_mov','compra')->avg('cotizacion');
+			$realventas=$real->where('tipo_mov','venta')->avg('cotizacion');
+		//fin promedio dolar
+		
 		$total_pesos=$oper->sum('importe');
-		return view('operaciones.opindex',compact('operaciones','total_dolar','total_euro','total_real','total_pesos','dolcompras','dolventas'));
+		return view('operaciones.opindex',compact('operaciones','total_dolar','total_euro','total_real','total_pesos','dolcompras','dolventas','eurcompras',
+					'eurventas','realcompras','realventas'));
 	}
 
 	/**

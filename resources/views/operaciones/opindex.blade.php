@@ -23,6 +23,7 @@
 							<h4 class="text-info">U$S: {{ number_format($total_dolar, 2, ",", ".") }}</h4>
 							<h5>PC: $ {{ number_format($dolcompras,2,",", ".") }}</h5>
 							<h5>PV: $ {{ number_format($dolventas,2,",", ".") }} </h5>
+							<h5>rr {{ $prom_dolcompras }}</h5>
 							
 						</div>
 						<div class="col-md-2">

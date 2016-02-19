@@ -6,7 +6,7 @@
         <table class="table table-bordered table-striped table-hover">
             <thead>
                 <tr>
-                    <th>S.No</th><th>Razonsocial</th><th>Direccion</th><th>Telefono</th><th>Actions</th>
+                    <th>S.No</th><th>Razonsocial</th><th>Tipo Mov.</th><th>Cantidad</th><th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -15,7 +15,7 @@
                 {{-- */$x++;/* --}}
                 <tr>
                     <td>{{ $x }}</td>
-                    <td><a>{{ $item->cliente_id }}</a></td>
+                    <td><a>{{ $item->razonsocial }}</a></td>
                     <td>{{ $item->tipo_mov }}</td>
                     <td>{{ $item->totxcli }}</td>
                     <td>
@@ -25,7 +25,7 @@
             @endforeach
             </tbody>
         </table>
-        <!--<div class="pagination"> {!! $totxcli->render() !!} </div>-->
+       <div class="pagination"> {!! $totxcli->setPath('')->render() !!} </div>
     </div>
     
     

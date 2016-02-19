@@ -6,6 +6,7 @@ use course\Operacion;
 use Illuminate\Http\Request;
 use course\Cliente;
 use course\Movimiento;
+use Illuminate\Support\Collection as Collection;
 
 class OperacionController extends Controller {
 
@@ -260,17 +261,13 @@ class OperacionController extends Controller {
 	}
 	
 	public function estadisticas(){
-		$opecli1=Operacion::all();
-		$opecli=$opecli1->groupBy('cliente_id');
 		
-		
-		$totxcli1 = \DB::table('operaciones')
-                     ->select('cliente_id','tipo_mov','cantidad',\DB::raw('SUM(cantidad) as totxcli')) 
+		$totxcli = \DB::table('operaciones')
+					 ->join('clientes', 'operaciones.cliente_id', '=', 'clientes.id')
+                     ->select('cliente_id','tipo_mov','cantidad',\DB::raw('SUM(cantidad) as totxcli'),'clientes.razonsocial') 
                      ->groupBy('cliente_id','tipo_mov')
-                     ->get();
+                     ->paginate(5);
 		
-		//dd($totxcli);
-		$totxcli=(object)$totxcli1; 
-		return view('operaciones.estadisticas.ope_estadisticas',compact('totxcli'));
+	return view('operaciones.estadisticas.ope_estadisticas',compact('totxcli'));
 	}
 }

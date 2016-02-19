@@ -20,13 +20,14 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 	'users'=> 'UsersController'
 ]);
+Route::get('/operacion/estadisticas','OperacionController@estadisticas');
+
 Route::resource('operacion','OperacionController');
+
 Route::group( ['prefix'=> 'Admin','middleware'=>'auth','namespace'=>'Admin'], function() {
 	Route::resource('user','UserController');
 	
 });
-
-
 
 
 Route::resource('cuits', 'CuitsController');

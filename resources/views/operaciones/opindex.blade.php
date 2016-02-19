@@ -13,8 +13,10 @@
 					<p class='alert alert-danger'>{{ Session::get('message') }}</p>
 				@endif
 				<div class="panel-heading">Operaciones</div>
-
+					<a class='btn btn-info' href="{{ action('OperacionController@estadisticas') }}" role='button'>Estadisticas</a>
+					
 				<div class="panel-body">
+					
 					<div class="row">
 						<div class="col-md-2">
 							<a class='btn btn-info' href="{{ route('operacion.create') }}" role='button'>Nueva Operacion</a>

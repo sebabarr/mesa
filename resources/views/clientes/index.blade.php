@@ -2,8 +2,8 @@
 @extends('home')
 
 @section('contenido')
-
-    <h1>Clientes <a href="{{ url('clientes/create') }}" class="btn btn-primary pull-right btn-sm">Add New Cliente</a></h1>
+    <h1> <a href="{{ url('clientes/estadisticas') }}" class="btn btn-primary btn-sm">Num x Clientes</a></h1>
+    <h1>Clientes <a href="{{ url('clientes/create') }}" class="btn btn-primary pull-right btn-sm">Nuevo Cliente</a></h1>
     <div class="table">
         <table class="table table-bordered table-striped table-hover">
             <thead>

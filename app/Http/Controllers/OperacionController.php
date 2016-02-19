@@ -258,5 +258,19 @@ class OperacionController extends Controller {
 		\Session::Flash('message','La Operacion fue eliminada');
 		return redirect()->route('operacion.index');
 	}
-
+	
+	public function estadisticas(){
+		$opecli1=Operacion::all();
+		$opecli=$opecli1->groupBy('cliente_id');
+		
+		
+		$totxcli1 = \DB::table('operaciones')
+                     ->select('cliente_id','tipo_mov','cantidad',\DB::raw('SUM(cantidad) as totxcli')) 
+                     ->groupBy('cliente_id','tipo_mov')
+                     ->get();
+		
+		//dd($totxcli);
+		$totxcli=(object)$totxcli1; 
+		return view('operaciones.estadisticas.ope_estadisticas',compact('totxcli'));
+	}
 }

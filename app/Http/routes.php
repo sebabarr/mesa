@@ -34,3 +34,5 @@ Route::resource('cuits', 'CuitsController');
 Route::resource('clientes','ClientesController');
 Route::resource('concepto', 'ConceptoController');
 Route::resource('movimientos', 'MovimientosController');
+Route::resource('bancos', 'BancosController');
+Route::resource('carteras', 'CarterasController');

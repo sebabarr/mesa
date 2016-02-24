@@ -5,12 +5,12 @@ namespace course\Http\Controllers;
 use course\Http\Requests;
 use course\Http\Controllers\Controller;
 
-use course\Movimiento;
+use course\Banco;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Session;
 
-class MovimientosController extends Controller
+class BancosController extends Controller
 {
 
     /**
@@ -20,10 +20,9 @@ class MovimientosController extends Controller
      */
     public function index()
     {
-        $movimientos = Movimiento::orderBy('created_at','desc')->paginate(10);
-        $saldo=Movimiento::sum('importe');
-        
-        return view('movimientos.index',compact('movimientos','saldo'));
+        $bancos = Banco::paginate(10);
+
+        return view('bancos.index', compact('bancos'));
     }
 
     /**
@@ -33,7 +32,7 @@ class MovimientosController extends Controller
      */
     public function create()
     {
-        return view('movimientos.create');
+        return view('bancos.create');
     }
 
     /**
@@ -43,12 +42,13 @@ class MovimientosController extends Controller
      */
     public function store(Request $request)
     {
-        
-        Movimiento::create($request->all());
+        $this->validate($request, ['entidad' => 'required', 'codigo' => 'required', ]);
 
-        \Session::flash('message', 'movimiento Agregado!');
+        Banco::create($request->all());
 
-        return redirect('movimientos');
+        \Session::flash('message', 'Banco Agregado!');
+
+        return redirect('bancos');
     }
 
     /**
@@ -60,9 +60,9 @@ class MovimientosController extends Controller
      */
     public function show($id)
     {
-        $movimiento = Movimiento::findOrFail($id);
+        $banco = Banco::findOrFail($id);
 
-        return view('movimientos.show', compact('movimiento'));
+        return view('bancos.show', compact('banco'));
     }
 
     /**
@@ -74,9 +74,9 @@ class MovimientosController extends Controller
      */
     public function edit($id)
     {
-        $movimiento = Movimiento::findOrFail($id);
+        $banco = Banco::findOrFail($id);
 
-        return view('movimientos.edit', compact('movimiento'));
+        return view('bancos.edit', compact('banco'));
     }
 
     /**
@@ -88,13 +88,14 @@ class MovimientosController extends Controller
      */
     public function update($id, Request $request)
     {
-        
-        $movimiento = Movimiento::findOrFail($id);
-        $movimiento->update($request->all());
+        $this->validate($request, ['entidad' => 'required', 'codigo' => 'required', ]);
 
-        \Session::flash('message', 'movimiento Modificado!');
+        $banco = Banco::findOrFail($id);
+        $banco->update($request->all());
 
-        return redirect('movimientos');
+        \Session::flash('message', 'Banco Modificado!');
+
+        return redirect('bancos');
     }
 
     /**
@@ -106,11 +107,11 @@ class MovimientosController extends Controller
      */
     public function destroy($id)
     {
-        Movimiento::destroy($id);
+        Banco::destroy($id);
 
-        \Session::flash('message', 'movimiento Borrado!');
+        \Session::flash('message', 'Banco Borrado!');
 
-        return redirect('movimientos');
+        return redirect('bancos');
     }
 
 }

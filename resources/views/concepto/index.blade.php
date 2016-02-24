@@ -4,6 +4,9 @@
 @section('contenido')
 
     <h1>Concepto <a href="{{ url('concepto/create') }}" class="btn btn-primary pull-right btn-sm">Add New Concepto</a></h1>
+    @if (Session::has('message'))
+					<p class='alert alert-danger'>{{ Session::get('message') }}</p>
+	@endif
     <div class="table">
         <table class="table table-bordered table-striped table-hover">
             <thead>

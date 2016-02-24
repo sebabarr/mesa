@@ -2,8 +2,8 @@
 @extends('home')
 
 @section('contenido')
-    <h1> <a href="{{ url('clientes/estadisticas') }}" class="btn btn-primary btn-sm">Num x Clientes</a></h1>
-    <h1>Clientes <a href="{{ url('clientes/create') }}" class="btn btn-primary pull-right btn-sm">Nuevo Cliente</a></h1>
+
+    <h1>Bancos <a href="{{ url('bancos/create') }}" class="btn btn-primary pull-right btn-sm">Nuevo Banco</a></h1>
     @if (Session::has('message'))
 					<p class='alert alert-danger'>{{ Session::get('message') }}</p>
 	@endif
@@ -11,23 +11,23 @@
         <table class="table table-bordered table-striped table-hover">
             <thead>
                 <tr>
-                    <th>S.No</th><th>Razonsocial</th><th>Direccion</th><th>Telefono</th><th>Actions</th>
+                    <th>S.No</th><th>Entidad</th><th>Codigo</th><th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
             {{-- */$x=0;/* --}}
-            @foreach($clientes as $item)
+            @foreach($bancos as $item)
                 {{-- */$x++;/* --}}
                 <tr>
                     <td>{{ $x }}</td>
-                    <td><a href="{{ url('clientes', $item->id) }}">{{ $item->razonsocial }}</a></td><td>{{ $item->direccion }}</td><td>{{ $item->telefono }}</td>
+                    <td><a href="{{ url('bancos', $item->id) }}">{{ $item->entidad }}</a></td><td>{{ $item->codigo }}</td>
                     <td>
-                        <a href="{{ url('clientes/' . $item->id . '/edit') }}">
+                        <a href="{{ url('bancos/' . $item->id . '/edit') }}">
                             <button type="submit" class="btn btn-primary btn-xs">Update</button>
                         </a> /
                         {!! Form::open([
                             'method'=>'DELETE',
-                            'url' => ['clientes', $item->id],
+                            'url' => ['bancos', $item->id],
                             'style' => 'display:inline'
                         ]) !!}
                             {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-xs']) !!}
@@ -37,7 +37,7 @@
             @endforeach
             </tbody>
         </table>
-        <div class="pagination"> {!! $clientes->render() !!} </div>
+        <div class="pagination"> {!! $bancos->render() !!} </div>
     </div>
 
 @endsection

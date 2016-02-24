@@ -5,12 +5,12 @@ namespace course\Http\Controllers;
 use course\Http\Requests;
 use course\Http\Controllers\Controller;
 
-use course\Movimiento;
-use Illuminate\Http\Request;
+use course\Cartera;
+use Illuminate\Http\Request; 
 use Carbon\Carbon;
 use Session;
 
-class MovimientosController extends Controller
+class CarterasController extends Controller
 {
 
     /**
@@ -20,10 +20,9 @@ class MovimientosController extends Controller
      */
     public function index()
     {
-        $movimientos = Movimiento::orderBy('created_at','desc')->paginate(10);
-        $saldo=Movimiento::sum('importe');
-        
-        return view('movimientos.index',compact('movimientos','saldo'));
+        $carteras = Cartera::paginate(10);
+
+        return view('carteras.index', compact('carteras'));
     }
 
     /**
@@ -33,7 +32,7 @@ class MovimientosController extends Controller
      */
     public function create()
     {
-        return view('movimientos.create');
+        return view('carteras.create');
     }
 
     /**
@@ -43,12 +42,13 @@ class MovimientosController extends Controller
      */
     public function store(Request $request)
     {
-        
-        Movimiento::create($request->all());
+        $this->validate($request, ['nombre' => 'required', ]);
 
-        \Session::flash('message', 'movimiento Agregado!');
+        Cartera::create($request->all());
 
-        return redirect('movimientos');
+        \Session::flash('message', 'Cartera Agregado!');
+
+        return redirect('carteras');
     }
 
     /**
@@ -60,9 +60,9 @@ class MovimientosController extends Controller
      */
     public function show($id)
     {
-        $movimiento = Movimiento::findOrFail($id);
+        $cartera = Cartera::findOrFail($id);
 
-        return view('movimientos.show', compact('movimiento'));
+        return view('carteras.show', compact('cartera'));
     }
 
     /**
@@ -74,9 +74,9 @@ class MovimientosController extends Controller
      */
     public function edit($id)
     {
-        $movimiento = Movimiento::findOrFail($id);
+        $cartera = Cartera::findOrFail($id);
 
-        return view('movimientos.edit', compact('movimiento'));
+        return view('carteras.edit', compact('cartera'));
     }
 
     /**
@@ -88,13 +88,14 @@ class MovimientosController extends Controller
      */
     public function update($id, Request $request)
     {
-        
-        $movimiento = Movimiento::findOrFail($id);
-        $movimiento->update($request->all());
+        $this->validate($request, ['nombre' => 'required', ]);
 
-        \Session::flash('message', 'movimiento Modificado!');
+        $cartera = Cartera::findOrFail($id);
+        $cartera->update($request->all());
 
-        return redirect('movimientos');
+        \Session::flash('message', 'Cartera Modificado!');
+
+        return redirect('carteras');
     }
 
     /**
@@ -106,11 +107,11 @@ class MovimientosController extends Controller
      */
     public function destroy($id)
     {
-        Movimiento::destroy($id);
+        Cartera::destroy($id);
 
-        \Session::flash('message', 'movimiento Borrado!');
+        \Session::flash('message', 'Cartera Borrado!');
 
-        return redirect('movimientos');
+        return redirect('carteras');
     }
 
 }

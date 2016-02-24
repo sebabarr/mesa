@@ -121,8 +121,12 @@ class OperacionController extends Controller {
 		//fin promedio real
 		
 		$total_pesos=$oper->sum('importe');
+		$ult_com=$dolarcompras->last();
+		$ult_ven=$dolarventas->last();
+		$ult_predol_com=$ult_com['cotizacion'];
+		$ult_predol_ven=$ult_ven['cotizacion'];
 		return view('operaciones.opindex',compact('operaciones','total_dolar','total_euro','total_real','total_pesos','prom_eurocompras',
-					'prom_euroventas','prom_realcompras','prom_realventas','prom_dolcompras','prom_dolventas'));
+					'prom_euroventas','prom_realcompras','ult_predol_com','ult_predol_ven','prom_realventas','prom_dolcompras','prom_dolventas'));
 	}
 
 	/**
@@ -266,6 +270,7 @@ class OperacionController extends Controller {
 					 ->join('clientes', 'operaciones.cliente_id', '=', 'clientes.id')
                      ->select('cliente_id','tipo_mov','cantidad',\DB::raw('SUM(cantidad) as totxcli'),'clientes.razonsocial') 
                      ->groupBy('cliente_id','tipo_mov')
+                     ->orderBy('totxcli')
                      ->paginate(5);
 		
 	return view('operaciones.estadisticas.ope_estadisticas',compact('totxcli'));

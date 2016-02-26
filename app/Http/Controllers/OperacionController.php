@@ -121,10 +121,11 @@ class OperacionController extends Controller {
 		//fin promedio real
 		
 		$total_pesos=$oper->sum('importe');
-		$ult_com=$dolarcompras->last();
-		$ult_ven=$dolarventas->last();
-		$ult_predol_com=$ult_com['cotizacion'];
-		$ult_predol_ven=$ult_ven['cotizacion'];
+		$ult_com=$operaciones->where('tipo_mov','compra')->where('moneda','Dolar')->sortBy('created_at')->first();
+		$ult_ven=$operaciones->where('tipo_mov','venta')->where('moneda','Dolar')->sortBy('created_at')->last();
+		$ult_predol_com=$ult_com->cotizacion;
+		$ult_predol_ven=$ult_ven->cotizacion;
+		
 		return view('operaciones.opindex',compact('operaciones','total_dolar','total_euro','total_real','total_pesos','prom_eurocompras',
 					'prom_euroventas','prom_realcompras','ult_predol_com','ult_predol_ven','prom_realventas','prom_dolcompras','prom_dolventas'));
 	}

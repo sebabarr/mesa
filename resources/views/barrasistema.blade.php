@@ -24,7 +24,7 @@
             <li><a href="{{ route('concepto.index') }}">Conceptos de Caja</a></li>
             <li><a href="{{ route('bancos.index') }}">Bancos</a></li>
             <li><a href="{{ route('carteras.index') }}">Carteras</a></li>
-          </ul>
+          </ul> 
         </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Moneda<span class="caret"></span></a>

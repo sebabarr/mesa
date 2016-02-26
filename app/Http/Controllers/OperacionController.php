@@ -121,7 +121,7 @@ class OperacionController extends Controller {
 		//fin promedio real
 		
 		$total_pesos=$oper->sum('importe');
-		$ult_com=$operaciones->where('tipo_mov','compra')->where('moneda','Dolar')->sortBy('created_at')->first();
+		$ult_com=$operaciones->where('tipo_mov','compra')->where('moneda','Dolar')->sortBy('created_at')->last();
 		$ult_ven=$operaciones->where('tipo_mov','venta')->where('moneda','Dolar')->sortBy('created_at')->last();
 		$ult_predol_com=$ult_com->cotizacion;
 		$ult_predol_ven=$ult_ven->cotizacion;

@@ -38,7 +38,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cheques<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="{{ route('operacion.index') }}">Compra de Cheques</a></li>
+            <li><a href="{{ route('cheques.index') }}">Compra de Cheques</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="{{ route('movimientos.index') }}">Venta de Cheques</a></li>
           </ul>

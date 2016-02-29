@@ -22,7 +22,10 @@ class OperacionController extends Controller {
 	public function index(Request $request) {
 	
 		$operaciones=Operacion::orderBy('created_at',"desc")->paginate(5);
+		//$oper=Operacion::all();
+		
 		$oper=Operacion::all();
+						
 		
 		$dolar = $oper->where('moneda','Dolar');
 		
@@ -112,7 +115,7 @@ class OperacionController extends Controller {
 				
 				$item['cotizacion'] = (abs($item['cantidad'])/$tot_realventas)*$item['cotizacion'];
 				
-			   return $item ;
+			   return $item ; 
 			});
 			$prom_realcompras=$nuevacolecompra->sum('cotizacion');
 			$prom_realventas=$nuevacoleventa->sum('cotizacion');
@@ -121,13 +124,32 @@ class OperacionController extends Controller {
 		//fin promedio real
 		
 		$total_pesos=$oper->sum('importe');
+		$ult_realc=$operaciones->where('tipo_mov','compra')->where('moneda','Real')->sortBy('created_at')->last();
+		$ult_realv=$operaciones->where('tipo_mov','venta')->where('moneda','Real')->sortBy('created_at')->last();
 		$ult_com=$operaciones->where('tipo_mov','compra')->where('moneda','Dolar')->sortBy('created_at')->last();
 		$ult_ven=$operaciones->where('tipo_mov','venta')->where('moneda','Dolar')->sortBy('created_at')->last();
-		$ult_predol_com=$ult_com->cotizacion;
-		$ult_predol_ven=$ult_ven->cotizacion;
 		
+		$ult_preeur=$operaciones->where('tipo_mov','compra')->where('moneda','Euro')->sortBy('created_at')->last();
+		$ult_preeur_v=$operaciones->where('tipo_mov','venta')->where('moneda','Euro')->sortBy('created_at')->last();
+		//dolar--------------------
+		
+			$ult_predol_com= ($ult_com==null) ? 0: $ult_com->cotizacion;
+			$ult_predol_ven= ($ult_ven==null) ? 0: $ult_ven->cotizacion;
+
+		//fin dolar----------------
+		//euro
+	 		
+
+			$ult_preeur_com=($ult_preeur==null)?0:$ult_preeur->cotizacion;
+			$ult_preeur_ven=($ult_preeur_v==null)?0:$ult_preeur_v->cotizacion;
+		///fin euro
+		//real
+			$ult_rea_com=($ult_realc==null)?0:$ult_realc->cotizacion;
+			$ult_rea_ven=($ult_realv==null)?0:$ult_realv->cotizacion;
+		//fin real
+		//dd($oper);
 		return view('operaciones.opindex',compact('operaciones','total_dolar','total_euro','total_real','total_pesos','prom_eurocompras',
-					'prom_euroventas','prom_realcompras','ult_predol_com','ult_predol_ven','prom_realventas','prom_dolcompras','prom_dolventas'));
+					'prom_euroventas','ult_preeur_com','ult_preeur_ven','ult_rea_com','ult_rea_ven','prom_realcompras','ult_predol_com','ult_predol_ven','prom_realventas','prom_dolcompras','prom_dolventas'));
 	}
 
 	/**

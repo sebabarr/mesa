@@ -22,7 +22,7 @@ class MovimientosController extends Controller
     {
         $movimientos = Movimiento::orderBy('created_at','desc')->paginate(10);
         $saldo=Movimiento::sum('importe');
-        
+       
         return view('movimientos.index',compact('movimientos','saldo'));
     }
 

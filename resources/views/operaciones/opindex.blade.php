@@ -29,14 +29,14 @@
 						</div>
 						<div class="col-md-2">
 							<h4 class="text-info">Euro: {{ number_format($total_euro, 2, ",", ".") }}</h4>
-							<h5>PC: $ {{ number_format($prom_eurocompras,2,",", ".") }}</h5>
-							<h5>PV: $ {{ number_format($prom_euroventas,2,",", ".") }} </h5>
+							<h5>PC: $ {{ number_format($prom_eurocompras,2,",", ".") }} PV: $ {{ number_format($prom_euroventas,2,",", ".") }}</h5>
+							<h5>PUC: $ {{ number_format($ult_preeur_com,2,",", ".") }}  PUV: $ {{ number_format($ult_preeur_ven,2,",", ".") }}  </h5>
 
 						</div>
 						<div class="col-md-2">
 							<h4 class="text-info">Real: {{ number_format($total_real, 2, ",", ".") }}</h4>
-							<h5>PC: $ {{ number_format($prom_realcompras,2,",", ".") }}</h5>
-							<h5>PV: $ {{ number_format($prom_realventas,2,",", ".") }} </h5>
+							<h5>PC: $ {{ number_format($prom_realcompras,2,",", ".") }} PV: $ {{ number_format($prom_realventas,2,",", ".") }}</h5>
+							<h5>PUC $ {{ number_format($ult_rea_com,2,",", ".") }} PUV $ {{ number_format($ult_rea_ven,2,",", ".") }}</h5> 
 
 						</div>
 						<div class="col-md-2">

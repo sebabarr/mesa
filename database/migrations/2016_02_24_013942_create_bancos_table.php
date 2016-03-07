@@ -12,12 +12,11 @@ class CreateBancosTable extends Migration
      */
     public function up()
     {
-        
+                
             Schema::create('bancos', function(Blueprint $table) {
                 $table->increments('id');
-                $table->string('entidad');
-$table->integer('codigo');
-
+                $table->string('entidad')->index();
+                $table->integer('codigo');
                 $table->timestamps();
             });
             

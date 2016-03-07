@@ -21,6 +21,7 @@ Route::controllers([
 	'users'=> 'UsersController'
 ]);
 Route::get('/operacion/estadisticas','OperacionController@estadisticas');
+Route::get("/cheques/{id}/venta","ChequesController@venta");
 
 Route::resource('operacion','OperacionController');
 

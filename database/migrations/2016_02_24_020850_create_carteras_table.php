@@ -15,7 +15,7 @@ class CreateCarterasTable extends Migration
         
             Schema::create('carteras', function(Blueprint $table) {
                 $table->increments('id');
-                $table->string('nombre');
+                $table->string('nombre')->index();
 
                 $table->timestamps();
             });

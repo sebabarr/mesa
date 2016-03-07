@@ -20,5 +20,9 @@ class Cuit extends Model
      * @var array
      */
     protected $fillable = ['razonsocial', 'numero', 'limite'];
+    
+    public function cheques(){
+        return $this->hasMany('course\cheque','id','id_cuit');
+    }
 
 }

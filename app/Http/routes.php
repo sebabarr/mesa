@@ -22,7 +22,7 @@ Route::controllers([
 ]);
 Route::get('/operacion/estadisticas','OperacionController@estadisticas');
 Route::get("/cheques/{id}/venta","ChequesController@venta");
-
+Route::post("/cheques/grabarventa",'ChequesController@grabarVenta');
 Route::resource('operacion','OperacionController');
 
 Route::group( ['prefix'=> 'Admin','middleware'=>'auth','namespace'=>'Admin'], function() {

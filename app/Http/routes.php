@@ -24,17 +24,17 @@ Route::get('/operacion/estadisticas','OperacionController@estadisticas');
 Route::get("/cheques/{id}/venta","ChequesController@venta");
 Route::post("/cheques/grabarventa",'ChequesController@grabarVenta');
 Route::resource('operacion','OperacionController');
-
-Route::group( ['prefix'=> 'Admin','middleware'=>'auth','namespace'=>'Admin'], function() {
-	Route::resource('user','UserController');
-	
-});
-
-
+Route::resource('cheques', 'ChequesController');
 Route::resource('cuits', 'CuitsController');
 Route::resource('clientes','ClientesController');
 Route::resource('concepto', 'ConceptoController');
 Route::resource('movimientos', 'MovimientosController');
 Route::resource('bancos', 'BancosController');
 Route::resource('carteras', 'CarterasController');
-Route::resource('cheques', 'ChequesController');
+
+
+Route::group( ['prefix'=> 'Admin','middleware'=>'auth','namespace'=>'Admin'], function() {
+	Route::resource('user','UserController');
+	
+});
+

@@ -26,6 +26,6 @@ class Cliente extends Model
         
     }
     public function cheques(){
-        return $this->hasMany("course\cheque","id_cliente","id");
+        return $this->hasMany("course\Cheque","id_cliente","id");
     }
 }

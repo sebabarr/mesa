@@ -8,11 +8,13 @@ use course\Chequeventa;
 use course\Cheque;
 use course\Cuit;
 use course\Banco;
+use course\Movicheque;
 use course\Cliente;
 use course\Cartera;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Session;
+
 
 class ChequesController extends Controller
 {
@@ -50,9 +52,24 @@ class ChequesController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, ['nrocheque' => 'required', 'importe' => 'required', 'fechavto' => 'required', ]);
+        $this->validate($request, ['nrocheque' => 'required',
+                                   'importe' => 'required', 'fechavto' => 'required', ]);
 
-        Cheque::create($request->all());
+        $chequeinsertado = Cheque::create($request->all());
+        
+        $clien = Cliente::findOrFail($request->id_cliente);
+        $clien->acumulado_cht = $clien->acumulado_cht + $chequeinsertado->importe;
+        $clien->save();
+        
+        $movicaja = new Movicheque();
+        $neto=0;
+        $neto=$chequeinsertado->importe-$chequeinsertado->desctasa-$chequeinsertado->descgasto-$chequeinsertado->descfijo;
+        $movicaja->importe = $neto*(-1);
+        $movicaja->operacion_id = $chequeinsertado->id;
+        $movicaja->concepto_id = 6;
+        $movicaja->comentario = "compra cheque nro:".$request->nrocheque;
+        $movicaja->save();
+        
 
         \Session::flash('message', 'Cheque Agregado!');
 
@@ -134,9 +151,20 @@ class ChequesController extends Controller
         
         $chv = Cheque::find($request->id_cheque);
         $chv->estado = "vendido";
+        $chv->save();
+        
         
         Chequeventa::create($request->all());
-        $chv->save();
+        
+        $movicaja = new Movicheque();
+        $neto=0;
+        $neto=$chv->importe-$chv->desctasa-$chv->descgasto-$chv->descfijo;
+        $movicaja->importe = $neto;
+        $movicaja->operacion_id = $chv->id;
+        $movicaja->concepto_id = 7;
+        $movicaja->comentario = "venta chequenro:".$chv->nrocheque;
+        $movicaja->save();
+        
         \Session::flash('message', 'Venta Grabada!');
 
         return redirect('cheques');

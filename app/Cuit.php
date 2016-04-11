@@ -24,5 +24,9 @@ class Cuit extends Model
     public function cheques(){
         return $this->hasMany('course\cheque','id','id_cuit');
     }
-
+    public function scopeName($query , $name){
+		if (trim($name)!=""){
+			$query->where('razonsocial','LIKE',"%$name%");
+		}	
+	}
 }

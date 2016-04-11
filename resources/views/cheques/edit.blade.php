@@ -12,7 +12,7 @@
    
    
     </script>
-    <h1>Edit Cheque</h1>
+    <h1>Editando Cheque</h1>
     <hr/>
 
     {!! Form::model($cheque, [
@@ -20,35 +20,44 @@
         'url' => ['cheques', $cheque->id],
         'class' => 'form-horizontal'
     ]) !!}
-
+        <div class="row">
+            <div class="col-md-4">
                 <div class="form-group {{ $errors->has('nrocheque') ? 'has-error' : ''}}">
-                {!! Form::label('nrocheque', 'Nrocheque: ', ['class' => 'col-sm-3 control-label']) !!}
-                <div class="col-sm-6">
-                    {!! Form::number('nrocheque', null, ['class' => 'form-control', 'required' => 'required']) !!}
-                    {!! $errors->first('nrocheque', '<p class="help-block">:message</p>') !!}
+                    {!! Form::label('nrocheque', 'Nrocheque: ', ['class' => 'col-sm-3 control-label']) !!}
+                    <div class="col-sm-6">
+                        {!! Form::number('nrocheque', null, ['class' => 'form-control', 'required' => 'required']) !!}
+                        {!! $errors->first('nrocheque', '<p class="help-block">:message</p>') !!}
+                    </div>
                 </div>
             </div>
-            <div class="form-group {{ $errors->has('importe') ? 'has-error' : ''}}">
-                {!! Form::label('importe', 'Importe: ', ['class' => 'col-sm-3 control-label']) !!}
-                <div class="col-sm-6">
-                    {!! Form::number('importe', null, ['class' => 'form-control', "id" => "imp" ,'required' => 'required']) !!}
-                    {!! $errors->first('importe', '<p class="help-block">:message</p>') !!}
-                </div>
-            </div>
-            <div class="form-group {{ $errors->has('id_banco') ? 'has-error' : ''}}">
-                {!! Form::label('id_banco', 'Id Banco: ', ['class' => 'col-sm-3 control-label']) !!}
-                <div class="col-sm-6">
-                    {!! Form::number('id_banco', null, ['class' => 'form-control']) !!}
-                    {!! $errors->first('id_banco', '<p class="help-block">:message</p>') !!}
-                </div>
-            </div>
-            <div class="form-group {{ $errors->has('fechavto') ? 'has-error' : ''}}">
+            <div class="div col-md-4">
+                <div class="form-group {{ $errors->has('fechavto') ? 'has-error' : ''}}">
                 {!! Form::label('fechavto', 'Fechavto: ', ['class' => 'col-sm-3 control-label']) !!}
-                <div class="col-sm-6">
-                    {!! Form::date('fechavto', null, ['class' => 'form-control', 'required' => 'required']) !!}
-                    {!! $errors->first('fechavto', '<p class="help-block">:message</p>') !!}
+                    <div class="col-sm-6">
+                        {!! Form::date('fechavto', null, ['class' => 'form-control', 'required' => 'required']) !!}
+                        {!! $errors->first('fechavto', '<p class="help-block">:message</p>') !!}
+                    </div>
                 </div>
             </div>
+            <div class="div col-md-4">
+                <div class="form-group {{ $errors->has('id_banco') ? 'has-error' : ''}}">
+                    {!! Form::label('id_banco', 'Id Banco: ', ['class' => 'col-sm-3 control-label']) !!}
+                    <div class="col-sm-6">
+                        {!! Form::number('id_banco', null, ['class' => 'form-control']) !!}
+                        {!! $errors->first('id_banco', '<p class="help-block">:message</p>') !!}
+                        {!! $cheque->id_banco !!}
+                    </div>
+                </div>
+            </div>    
+        </div>   
+        <div class="form-group {{ $errors->has('importe') ? 'has-error' : ''}}">
+                    {!! Form::label('importe', 'Importe: ', ['class' => 'col-sm-3 control-label']) !!}
+                    <div class="col-sm-6">
+                        {!! Form::number('importe', null, ['class' => 'form-control', "id" => "imp" ,'required' => 'required']) !!}
+                        {!! $errors->first('importe', '<p class="help-block">:message</p>') !!}
+                    </div>
+                </div>
+            
             <div class="form-group {{ $errors->has('id_cuit') ? 'has-error' : ''}}">
                 {!! Form::label('id_cuit', 'Id Cuit: ', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">

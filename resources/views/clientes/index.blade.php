@@ -2,11 +2,23 @@
 @extends('home')
 
 @section('contenido')
-    <h1> <a href="{{ url('clientes/estadisticas') }}" class="btn btn-primary btn-sm">Num x Clientes</a></h1>
-    <h1>Clientes <a href="{{ url('clientes/create') }}" class="btn btn-primary pull-right btn-sm">Nuevo Cliente</a></h1>
-    @if (Session::has('message'))
-					<p class='alert alert-danger'>{{ Session::get('message') }}</p>
-	@endif
+    <!--<h1> <a href="{{ url('clientes/estadisticas') }}" class="btn btn-primary btn-sm">Num x Clientes</a></h1>-->
+    <div class="row">
+        <div class="col-md-4">
+            <h1>Clientes <a href="{{ url('clientes/create') }}" class="btn btn-primary pull-right btn-sm">Nuevo Cliente</a></h1>
+            @if (Session::has('message'))
+        					<p class='alert alert-danger'>{{ Session::get('message') }}</p>
+        	@endif
+        </div>
+        <div class="col-md-4">
+        	{!! Form::open(['route'=>'clientes.index','method'=>'GET','class'=>'navbar-form navbar-left pull-right','role'=>'search']) !!}	
+              	<div class="form-group">
+                	{!! Form::text('name',null,['class'=>'form-control', 'placeholder'=>'Cliente a Buscar']) !!}
+        	  	</div>
+        	  	<button type="submit" class="btn btn-default">Buscar</button>
+            {!! Form::close() !!}
+        </div>    
+    </div>
     <div class="table">
         <table class="table table-bordered table-striped table-hover">
             <thead>

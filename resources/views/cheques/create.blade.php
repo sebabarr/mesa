@@ -58,7 +58,7 @@
                 var desctasa = (($("#tasa_d").val()/30*dias)/100)*$("#importe").val();
                 desctasa.toPrecision(2);
                 $("#desc_d").val(desctasa);
-                var descgasto = ($("#tasa_g").val()/100)*$("#importe").val();
+                var descgasto = ($("#tasa_g").val()/100)*$("#importe").val(); 
                 descgasto.toPrecision(2);
                 $("#des_gasto").val(descgasto);
                 var tn1 = $("#importe").val()-$("#des_gasto").val()-$("#desc_d").val()-$("#descufijo").val();

@@ -20,5 +20,8 @@ class Banco extends Model
      * @var array
      */
     protected $fillable = ['entidad', 'codigo'];
-
+    
+    public function cheques(){
+        return $this->hasMany("course\cheque",'id_banco','id');
+    }
 }

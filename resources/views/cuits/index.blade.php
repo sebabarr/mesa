@@ -1,11 +1,22 @@
 @extends('home')
 
 @section('contenido')
-
-    <h1>Cuits <a href="{{ url('cuits/create') }}" class="btn btn-primary pull-right btn-sm">Nuevo Cuit</a></h1>
-    @if (Session::has('message'))
-					<p class='alert alert-danger'>{{ Session::get('message') }}</p>
-	@endif
+    <div class="row">
+        <div class="col-md-4">
+            <h1>Cuits <a href="{{ url('cuits/create') }}" class="btn btn-primary pull-right btn-sm">Nuevo Cuit</a></h1>
+        </div>
+        <div class="col-md-4">
+            @if (Session::has('message'))
+        					<p class='alert alert-danger'>{{ Session::get('message') }}</p>
+        	@endif
+        	{!! Form::open(['route'=>'cuits.index','method'=>'GET','class'=>'navbar-form navbar-left pull-right','role'=>'search']) !!}	
+        	  	<div class="form-group">
+        	    	{!! Form::text('name',null,['class'=>'form-control', 'placeholder'=>'Cuit a Buscar']) !!}
+        	  	</div>
+        	  	<button type="submit" class="btn btn-default">Buscar</button>
+        	{!! Form::close() !!}
+        </div>	
+    </div>	
     <div class="table">
         <table class="table table-bordered table-striped table-hover">
             <thead>

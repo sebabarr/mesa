@@ -21,9 +21,9 @@ class ClientesController extends Controller
      public function __construct () {
 		$this->middleware('auth');
 	}
-    public function index()
+    public function index(Request $request)
     {
-        $clientes = Cliente::paginate(10);
+        $clientes = Cliente::name($request->get('name'))->paginate(7);
       
         return view('clientes.index', compact('clientes'));
     }

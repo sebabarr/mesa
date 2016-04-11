@@ -22,9 +22,9 @@ class CuitsController extends Controller
 		$this->middleware('auth');
 	}
 	
-    public function index()
+    public function index(Request $request)
     {
-        $cuits = Cuit::paginate(15);
+        $cuits = Cuit::name($request->get('name'))->paginate(7);
 
         return view('cuits.index', compact('cuits'));
     }

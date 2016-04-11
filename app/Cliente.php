@@ -28,4 +28,9 @@ class Cliente extends Model
     public function cheques(){
         return $this->hasMany("course\Cheque","id_cliente","id");
     }
+    public function scopeName($query , $name){
+		if (trim($name)!=""){
+			$query->where('razonsocial','LIKE',"%$name%");
+		}	
+	}
 }

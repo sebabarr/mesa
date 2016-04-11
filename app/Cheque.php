@@ -31,5 +31,7 @@ class Cheque extends Model
     public function clientes(){
         return $this->belongsTo('course\Cliente','id_cliente','id');
     }
-
+    public function bancos(){
+        return $this->belongsTo('course\Banco','id','id_banco');
+    }
 }

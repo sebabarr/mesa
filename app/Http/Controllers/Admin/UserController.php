@@ -3,7 +3,7 @@
 use course\Http\Requests;
 use course\Http\Controllers\Controller;
 use course\User;
-use Illuminate\Http\Request;
+use Illuminate\Http\Request; 
 
 class UserController extends Controller {
 

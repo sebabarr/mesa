@@ -23,7 +23,7 @@ class ClientesController extends Controller
 	}
     public function index(Request $request)
     {
-        $clientes = Cliente::name($request->get('name'))->paginate(7);
+        $clientes = Cliente::name($request->get('name'))->orderBy("razonsocial","asc")->paginate(7);
       
         return view('clientes.index', compact('clientes'));
     }

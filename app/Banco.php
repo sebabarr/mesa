@@ -24,4 +24,9 @@ class Banco extends Model
     public function cheques(){
         return $this->hasMany("course\cheque",'id_banco','id');
     }
+    public function scopeName($query , $name){
+		if (trim($name)!=""){
+			$query->where('entidad','LIKE',"%$name%");
+		}	
+	}
 }

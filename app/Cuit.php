@@ -29,4 +29,9 @@ class Cuit extends Model
 			$query->where('razonsocial','LIKE',"%$name%");
 		}	
 	}
+	 public function scopeNumero($query , $nume){
+		if (trim($nume)!=""){
+			$query->where('numero','LIKE',"%$nume%");
+		}	
+	}
 }

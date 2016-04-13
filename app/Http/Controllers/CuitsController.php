@@ -22,10 +22,14 @@ class CuitsController extends Controller
 		$this->middleware('auth');
 	}
 	
-    public function index(Request $request)
+    public function index(Request $request) 
     {
-        $cuits = Cuit::name($request->get('name'))->paginate(7);
-
+        if ($request->numero!="on"){       
+            $cuits = Cuit::name($request->get('name'))->orderBy("razonsocial","asc")->paginate(7);
+        }    
+        else  {
+            $cuits = Cuit::numero($request->get('nume'))->orderBy("numero","asc")->paginate(7);
+        }
         return view('cuits.index', compact('cuits'));
     }
 

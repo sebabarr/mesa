@@ -18,9 +18,9 @@ class BancosController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $bancos = Banco::paginate(10);
+        $bancos = Banco::name($request->get('name'))->orderBy("entidad","asc")->paginate(7);
 
         return view('bancos.index', compact('bancos'));
     }

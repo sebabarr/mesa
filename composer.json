@@ -10,7 +10,8 @@
   		
 		"fzaninotto/faker": "^1.5",
 		"appzcoder/crud-generator": "^1.0",
-		"laravelcollective/html": "5.1.*"
+		"laravelcollective/html": "5.1.*",
+		"barryvdh/laravel-debugbar": "^2.2"
    		},
 
 	"require-dev": {

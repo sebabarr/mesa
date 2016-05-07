@@ -2,7 +2,7 @@
 @extends('home')
 
 @section('contenido')
-    <!--<h1> <a href="{{ url('clientes/estadisticas') }}" class="btn btn-primary btn-sm">Num x Clientes</a></h1>-->
+    
     <div class="row">
         <div class="col-md-4">
             <h1>Clientes <a href="{{ url('clientes/create') }}" class="btn btn-primary pull-right btn-sm">Nuevo Cliente</a></h1>
@@ -23,7 +23,7 @@
         <table class="table table-bordered table-striped table-hover">
             <thead>
                 <tr>
-                    <th>S.No</th><th>Razonsocial</th><th>Direccion</th><th>Telefono</th><th>Actions</th>
+                    <th>S.No</th><th>Razonsocial</th><th>Direccion</th><th>Telefono</th><th>Cuit</th><th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,7 +32,10 @@
                 {{-- */$x++;/* --}}
                 <tr>
                     <td>{{ $x }}</td>
-                    <td><a href="{{ url('clientes', $item->id) }}">{{ $item->razonsocial }}</a></td><td>{{ $item->direccion }}</td><td>{{ $item->telefono }}</td>
+                    <td><a href="{{ url('clientes', $item->id) }}">{{ $item->razonsocial }}</a></td>
+                    <td>{{ $item->direccion }}</td>
+                    <td>{{ $item->telefono }}</td>
+                    <td>{{ $item->cuit }}</td>
                     <td>
                         <a href="{{ url('clientes/' . $item->id . '/edit') }}">
                             <button type="submit" class="btn btn-primary btn-xs">Update</button>

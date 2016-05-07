@@ -138,6 +138,8 @@ return [
 		Appzcoder\CrudGenerator\CrudGeneratorServiceProvider::class,
 		Laracasts\Flash\FlashServiceProvider::class,
 		Collective\Html\HtmlServiceProvider::class,
+		'Barryvdh\Debugbar\ServiceProvider',
+		Barryvdh\DomPDF\ServiceProvider::class,
 	//	'Laracasts\Generators\GeneratorsServiceProvider',
 		
 		
@@ -199,7 +201,9 @@ return [
 		'View'      => 'Illuminate\Support\Facades\View',
 		'Form' => Collective\Html\FormFacade::class,
       	'Html' => Collective\Html\HtmlFacade::class,
-		'Flash'     => Laracasts\Flash\Flash::class
+		'Flash'     => Laracasts\Flash\Flash::class,
+		'Debugbar' => 'Barryvdh\Debugbar\Facade',
+		'PDF' => 'Barryvdh\DomPDF\Facade'
 	],
 
 ];

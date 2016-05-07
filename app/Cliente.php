@@ -19,7 +19,7 @@ class Cliente extends Model
      *
      * @var array
      */
-    protected $fillable = ['razonsocial', 'direccion', 'telefono', 'limite_chp', 'limite_cht', 'tasa_desc', 'tasa_gasto', 'gasto_fijo'];
+    protected $fillable = ['razonsocial', 'direccion', 'telefono', 'limite_chp', 'limite_cht', 'tasa_desc', 'tasa_gasto', 'gasto_fijo','cuit'];
     
     public function operaciones(){
         return $this->hasMany('course\Operacion','cliente_id','id');

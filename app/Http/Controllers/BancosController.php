@@ -30,6 +30,14 @@ class BancosController extends Controller
      *
      * @return Response
      */
+    public function imprimir()
+    {
+        $banco=Banco::all()->sortBy('codigo');
+        $view = \View::make('bancos.listado.lisban', compact('banco'));
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+        return $pdf->stream('bancos.listado.lisban');
+    } 
     public function create()
     {
         return view('bancos.create');

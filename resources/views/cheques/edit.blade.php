@@ -45,7 +45,7 @@
                     <div class="col-sm-6">
                         {!! Form::number('id_banco', null, ['class' => 'form-control']) !!}
                         {!! $errors->first('id_banco', '<p class="help-block">:message</p>') !!}
-                        {!! $cheque->id_banco !!}
+                        {!! $cheque->bancos->entidad !!}
                     </div>
                 </div>
             </div>    

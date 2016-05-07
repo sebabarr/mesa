@@ -4,11 +4,12 @@
 @section('contenido')
     <div class="row"></div>
     
-        <div class="col-md-4">
-            <h1>Cheques</h1>
+        
+        <div class="col-md-3">
+            <h3>Total Cartera: $ {{ number_format($tot_cartera, 2, ",", ".") }}</h3>
         </div>
         <div class="col-md-4">
-            <h3>Total Cartera: $ {{ number_format($tot_cartera, 2, ",", ".") }}</h3>
+            <h3>Total Vendidos: $ {{ number_format($tot_cartera, 2, ",", ".") }}</h3>
         </div>
         <div class="col-md-4">
             <a href="{{ url('cheques/create') }}" class="btn btn-primary pull-right btn-sm">Comprar Cheque</a>
@@ -51,6 +52,9 @@
                         {!! Form::close() !!}
                         <a href="{{ url('cheques/' . $item->id . '/venta') }}"> 
                             <button type="submit" class="btn btn-primary btn-xs">Vender</button>
+                        </a>
+                        <a href="{{ url('cheques/' . $item->id . '/imprimircesion') }}"> 
+                            <button type="submit" class="btn btn-primary btn-xs">Cesion</button>
                         </a>
                     </td>
                 </tr>

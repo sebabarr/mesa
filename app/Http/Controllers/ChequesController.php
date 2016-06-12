@@ -11,8 +11,10 @@ use course\Banco;
 use course\Movicheque;
 use course\Cliente;
 use course\Cartera;
+use course\myclas;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+
 use Session;
 
 
@@ -26,7 +28,7 @@ class ChequesController extends Controller
      */
     public function index()
     {
-        $cheques = Cheque::orderBy("created_at","desc")->where("estado","cartera")->paginate(5);
+        $cheques = Cheque::orderBy("fechavto","asc")->where("estado","cartera")->paginate(8);
         $tot_cartera=Cheque::all()->where("estado","cartera")->sum("importe");
         $tot_vendido=Cheque::all()->where("estado","vendido")->sum("importe");
         return view('cheques.index', compact('cheques',"tot_cartera","tot_vendido"));
@@ -175,11 +177,14 @@ class ChequesController extends Controller
     {
         $cheque = Cheque::find($id);
         $razon = $cheque->cuits->razonsocial;
+        $V=new EnLetras();
+        
+        
         $var_impre=["nrocheque"=>$cheque->nrocheque,"imp"=>$cheque->importe,"fecvto"=>$cheque->fechavto,
                     "cuit"=>$cheque->id_cuit,"librador"=>$razon,"banco"=>$cheque->bancos->entidad,
                     "nomcli"=>$cheque->clientes->razonsocial,"dni"=>$cheque->clientes->cuit,
-                    "dire"=>$cheque->clientes->direccion];
-        $view = \View::make('cheques.listados.cesionch', compact('var_impre'));
+                    "dire"=>$cheque->clientes->direccion,"fechahoy"=>date('d-m-Y'),"impletras"=>$V->ValorEnLetras($cheque->importe,"pesos")];
+        $view = \View::make('cheques.listados.cesionch', compact('var_impre'))->render();
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($view);
         return $pdf->stream('cheques.listados.cesionch');

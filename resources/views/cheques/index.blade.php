@@ -9,7 +9,7 @@
             <h3>Total Cartera: $ {{ number_format($tot_cartera, 2, ",", ".") }}</h3>
         </div>
         <div class="col-md-4">
-            <h3>Total Vendidos: $ {{ number_format($tot_cartera, 2, ",", ".") }}</h3>
+            <h3>Total Vendidos: $ {{ number_format($tot_vendido, 2, ",", ".") }}</h3>
         </div>
         <div class="col-md-4">
             <a href="{{ url('cheques/create') }}" class="btn btn-primary pull-right btn-sm">Comprar Cheque</a>

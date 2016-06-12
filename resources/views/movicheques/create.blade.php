@@ -24,7 +24,7 @@
             <div class="form-group {{ $errors->has('importe') ? 'has-error' : ''}}">
                 {!! Form::label('importe', 'Importe: ', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
-                    {!! Form::number('importe', null, ['class' => 'form-control']) !!}
+                    {!! Form::number('importe', null, ['class' => 'form-control','step'=>"0.01"]) !!}
                     {!! $errors->first('importe', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>

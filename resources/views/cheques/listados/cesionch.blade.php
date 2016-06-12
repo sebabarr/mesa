@@ -9,7 +9,7 @@
 
     <main>
         <h2>CESION DE CHEQUE</h2>
-        <p>Entre {{ $var_impre["nomcli"]}}, D.N.I. {{ $var_impre["dni"]}} , con domicilio en {{ $var_impre["dire"] }} de la localidad de [cba] , en adelante
+        <p>Entre {{ $var_impre["nomcli"]}}, D.N.I. {{ $var_impre["dni"]}} , con domicilio en {{ $var_impre["dire"] }} de la localidad de Cordoba , en adelante
             denominado EL CEDENTE, por una parte y Barr Sebastian Raul, 22.561.111, con domicilio en J.Jose de Urquiza 223 de la
             Ciudad de Cordoba, en adelante denominado EL CESIONARIO, se conviene en realizar el siguiente contrato
             de la cesion de cheque(s), conforme lo establecen las cláusulas que se disponen a continuacion:
@@ -22,9 +22,9 @@
         <table>
             <thead>
                 <tr>
-                    <th>CHEQUE</th>
+                    <th>Nro.CHEQUE</th>
                     <th>IMPORTE</th>
-                    <th>FECHA</th>
+                    <th>FECHA Vto.</th>
                     <th>CUIT</th>
                     <th>LIBRADOR</th>
                     <th>BANCO</th>
@@ -88,13 +88,13 @@
                 Ciudad de Cordoba, con renuncia a cualquier otro fuero o jurisdiccion que pudiera corresponderles, constituyendo domicilio
                 a todos los efectos legales en los mencionados anteriormente.
                 En prueba de conformidad se firman dos ejemplares de un mismo tenor y a un solo efecto en 
-                la Ciudad de Cordoba, a los [fecha de hoy].--
+                la Ciudad de Cordoba, el {{ $var_impre["fechahoy"] }}.--
             </p>
             
             
             
             
-        <p>--------------------------------------------------------------------</p>    
+        <p>-----------------------------------------------------------</p>    
         <p> Firma                Aclaracion             DNI</p>
         
         
@@ -102,10 +102,10 @@
         --------------------------------------------------------------------------------- 
         
         Librado en la Ciudad de Cordoba, Provincia de Cordoba, a los [fecha de hoy] 
-        Con fecha [fecha de cheque], PAGARE a [titular de credito], D.N.I. [xxxx], o a su orden
-        , sin protesto (Articulo 50 Decreto - Ley N° 5.965/63), la suma de pesos [importe en letras]. El capital de este
+        Con fecha [fecha de cheque], PAGARE a Barr Sebastian Raul, D.N.I. 22.561.111, o a su orden
+        , sin protesto (Articulo 50 Decreto - Ley N° 5.965/63), la suma de pesos {{ $var_impre["impletras"]}}. El capital de este
         pagaré devengara un interes compensatorio a una tasa del 12% anual contado desde la fecha de libramiento
-        y hasta su efectivo pago. Lugar de pago: [direccion oficina].
+        y hasta su efectivo pago. Lugar de pago: 25 de Mayo 255 Of. 4-Ciudad de Cordoba.
         
         Librador:_________________________________________________
         Domicilio del librador:__________________________________________

@@ -30,7 +30,17 @@ class ChequesController extends Controller
     {
         $cheques = Cheque::orderBy("fechavto","asc")->where("estado","cartera")->paginate(8);
         $tot_cartera=Cheque::all()->where("estado","cartera")->sum("importe");
-        $tot_vendido=Cheque::all()->where("estado","vendido")->sum("importe");
+        $vendidos=Cheque::all()->where("estado","vendido");//->sum("importe");
+        $ff = $vendidos->filter(function($vendido){
+                    $var1= date_create($vendido->fechavto);
+                    $var2= date_create(date("Y-m-d"));
+                    if ($var1 > $var2) {
+                        return true;
+                    }
+                    
+                    
+        });
+        $tot_vendido=$ff->sum("importe");
         return view('cheques.index', compact('cheques',"tot_cartera","tot_vendido"));
     }
  

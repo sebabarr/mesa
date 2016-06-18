@@ -14,13 +14,17 @@ use course\Cartera;
 use course\myclas;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use DB;
 
 use Session;
 
 
 class ChequesController extends Controller
 {
-
+    
+    public function __construct () {
+		$this->middleware('auth');
+	}
     /**
      * Display a listing of the resource.
      *
@@ -30,7 +34,7 @@ class ChequesController extends Controller
     {
         $cheques = Cheque::orderBy("fechavto","asc")->where("estado","cartera")->paginate(8);
         $tot_cartera=Cheque::all()->where("estado","cartera")->sum("importe");
-        $vendidos=Cheque::all()->where("estado","vendido");//->sum("importe");
+        $vendidos=Cheque::all()->where("estado","vendido");
         $ff = $vendidos->filter(function($vendido){
                     $var1= date_create($vendido->fechavto);
                     $var2= date_create(date("Y-m-d"));
@@ -175,7 +179,7 @@ class ChequesController extends Controller
         $movicaja->importe = $neto;
         $movicaja->operacion_id = $chv->id;
         $movicaja->concepto_id = 7;
-        $movicaja->comentario = "venta chequenro:".$chv->nrocheque;
+        $movicaja->comentario = "venta cheque nro:".$chv->nrocheque;
         $movicaja->save();
         
         \Session::flash('message', 'Venta Grabada!');
@@ -199,4 +203,25 @@ class ChequesController extends Controller
         $pdf->loadHTML($view);
         return $pdf->stream('cheques.listados.cesionch');
     } 
+    
+    public function totxcli()
+    {   
+        $var2= date_create(date("Y-m-d"));
+        $totxclie=DB::table('cheques')
+                    ->select('id_cliente', DB::raw('SUM(importe) as total_cliente'))
+                    ->where('fechavto','>=',$var2)
+                    ->groupBy('id_cliente')
+                    ->get();
+        
+        
+
+        return \View::make('cheques.totxcliente',compact("totxclie"));
+    }
+    
+    public function totxcuits()
+    {
+        echo "llegue2";
+        
+    }
+    
 }

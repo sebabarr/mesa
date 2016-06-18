@@ -40,7 +40,8 @@
           <ul class="dropdown-menu">
             <li><a href="{{ route('cheques.index') }}">Cartera de Cheques</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="">Consultas cheques</a></li>
+            <li><a href="{{ action('ChequesController@totxcli') }}">Totales x Cliente</a></li>
+            <li><a href="{{ action('ChequesController@totxcuits') }}">Totales x Cuits</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="{{ route('movicheques.index') }}">Caja Cheques</a></li>
           </ul>

@@ -33,5 +33,5 @@ class Cheque extends Model
     }
     public function bancos(){
         return $this->belongsTo('course\Banco','id_banco','id');
-    }
+    }   
 }

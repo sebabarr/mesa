@@ -2,8 +2,13 @@
 
 @section('contenido')
 
-    <h1>Totales x Clientes</h1>
-        <div class="table-responsive">
+    <div class="row">
+        <div class="col-md-4">Totales x Clientes</div>
+        <div class="col-md-4">{{ $totalcartera }}</div>
+        <div class="col-md-4">.col-md-4</div>
+    </div>
+           
+    <div class="table-responsive">
             <table class="table table-bordered table-striped table-hover">
                 <thead>
                     <tr>
@@ -17,8 +22,9 @@
                     @foreach($totxclie as $item)
                         <tr>
                         <td>{{ $item->id_cliente }}</td>
-                        <td></td>   
-                        <td>{{ $item->total_cliente }}</td>
+                        <td>{{ $item->razonsocial }}</td>   
+                        <td>$ {{ number_format($item->total_cliente, 2, '.',',') }}</td>
+                        <td>{{ number_format($item->por_cartera,2) }}%</td>
                         </tr>
                     @endforeach    
                 </tbody>    

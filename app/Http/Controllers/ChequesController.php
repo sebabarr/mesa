@@ -15,7 +15,7 @@ use course\myclas;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use DB;
-
+use Illuminate\Support\Collection as Collection;
 use Session;
 
 
@@ -207,15 +207,27 @@ class ChequesController extends Controller
     public function totxcli()
     {   
         $var2= date_create(date("Y-m-d"));
-        $totxclie=DB::table('cheques')
-                    ->select('id_cliente', DB::raw('SUM(importe) as total_cliente'))
+        $res=DB::table('cheques')
+                    ->join('clientes', 'cheques.id_cliente','=','clientes.id')
+                    ->select('id_cliente', DB::raw('SUM(importe) as total_cliente'),'clientes.razonsocial',DB::raw('SUM(importe) as por_cartera'))
                     ->where('fechavto','>=',$var2)
                     ->groupBy('id_cliente')
                     ->get();
         
+        $totxclie = Collection::make($res);
+      //dd($totxclie);
+       
+      $totalcartera=$totxclie->sum("total_cliente");
+      $totxclie= $totxclie->each(function($item,$key) use ($totalcartera){
+          
+          $por_car=$item->total_cliente/$totalcartera;
+          $item->por_cartera = $por_car;
+          return true;
+      });
+          
+      
+        return \View::make('cheques.totxcliente',compact("totxclie",'totalcartera'));
         
-
-        return \View::make('cheques.totxcliente',compact("totxclie"));
     }
     
     public function totxcuits()

@@ -256,7 +256,7 @@ class ChequesController extends Controller
                 
         $cole=Collection::make($res);
         
-        //$t = Collection::make($res);
+        
         $tot_int=$cole->sum('desctasa');
         $tot_gas=$cole->sum('descgasto');
         $tot_otr=$cole->sum('descfijo');

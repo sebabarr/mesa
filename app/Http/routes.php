@@ -20,13 +20,17 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 	'users'=> 'UsersController'
 ]);
+
+
 Route::get('/cheques/totxclientes','ChequesController@totxcli');
 Route::get('/cheques/totxcuits','ChequesController@totxcuits');
+Route::get('/cheques/tot_ing_eng','ChequesController@tot_ing_eng');
 Route::get('/cheques/{id}/imprimircesion',"ChequesController@imprimircesion");
 Route::get('/bancos/imprimir','BancosController@imprimir');
 Route::get('/operacion/estadisticas','OperacionController@estadisticas');
 Route::get("/cheques/{id}/venta","ChequesController@venta");
 Route::post("/cheques/grabarventa",'ChequesController@grabarVenta');
+Route::get('/cheques/t_ing_eng','ChequesController@t_ing_eng');
 Route::resource('operacion','OperacionController');
 Route::resource('cheques', 'ChequesController');
 Route::resource('cuits', 'CuitsController');

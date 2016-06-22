@@ -15,8 +15,10 @@ use course\myclas;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use DB;
+use Input;
 use Illuminate\Support\Collection as Collection;
 use Session;
+
 
 
 class ChequesController extends Controller
@@ -236,4 +238,40 @@ class ChequesController extends Controller
         
     }
     
+    public function tot_ing_eng()
+    
+    {
+        
+        return \View::make('cheques.tot_ie');
+    }
+    
+    public function t_ing_eng()
+    {
+        $fd=Input::get("fechad");
+        $fh=Input::get("fechah");
+        
+        $res=DB::table('cheques')
+                ->whereBetween('created_at', [$fd,$fh])
+                ->get();
+                
+        $cole=Collection::make($res);
+        
+        //$t = Collection::make($res);
+        $tot_int=$cole->sum('desctasa');
+        $tot_gas=$cole->sum('descgasto');
+        $tot_otr=$cole->sum('descfijo');
+        $tr=$cole->count();
+        
+        $tot_pag=$cole->sum('tasa_desc');
+        $tot_pag_gas=$cole->sum('tasa_gast');
+        
+        
+       return response()->json(['tot_int' => $tot_int,
+                                'tot_gas' => $tot_gas,
+                                'tot_otr' => $tot_otr,
+                                'tot_pag' => $tot_pag,
+                                'tot_pag_gas'=>$tot_pag_gas,
+                                'tr'=> $tr ]);
+       
+    }
 }

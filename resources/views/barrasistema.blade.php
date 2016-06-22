@@ -44,6 +44,7 @@
             <li><a href="{{ action('ChequesController@totxcuits') }}">Totales x Cuits</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="{{ route('movicheques.index') }}">Caja Cheques</a></li>
+            <li><a href="{{ action('ChequesController@tot_ing_eng') }}">Total Ing-Eng</a></li>
           </ul>
         </li>
       </ul>

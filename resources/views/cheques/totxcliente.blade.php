@@ -3,9 +3,9 @@
 @section('contenido')
 
     <div class="row">
-        <div class="col-md-4">Totales x Clientes</div>
+        <div class="col-md-6">Totales x Clientes</div>
         <div class="col-md-4">{{ $totalcartera }}</div>
-        <div class="col-md-4">.col-md-4</div>
+        
     </div>
            
     <div class="table-responsive">

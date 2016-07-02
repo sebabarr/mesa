@@ -262,8 +262,14 @@ class ChequesController extends Controller
         $tot_otr=$cole->sum('descfijo');
         $tr=$cole->count();
         
-        $tot_pag=$cole->sum('tasa_desc');
-        $tot_pag_gas=$cole->sum('tasa_gast');
+        $res1=DB::table('chequeven')
+                ->whereBetween('created_at', [$fd,$fh])
+                ->get();
+                
+        $cole1=Collection::make($res1);
+        $tot_pag=$cole1->sum('descuento');
+        $tot_pag_gas=$cole1->sum('gasto');
+        $tot_pag_df=$cole1->sum('descuentofijo');
         
         
        return response()->json(['tot_int' => $tot_int,
@@ -271,7 +277,8 @@ class ChequesController extends Controller
                                 'tot_otr' => $tot_otr,
                                 'tot_pag' => $tot_pag,
                                 'tot_pag_gas'=>$tot_pag_gas,
-                                'tr'=> $tr ]);
+                                'tr'=> $tr,
+                                'tot_pag_desf'=>$tot_pag_df ]);
        
     }
 }

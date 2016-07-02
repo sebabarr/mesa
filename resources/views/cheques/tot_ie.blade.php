@@ -32,6 +32,17 @@ $(document).ready(function(){
                 $("#totxgastos").val(datos.tot_gas);
                 $("#totxgaspag").val(datos.tot_pag_gas);
                 $("#totxotr").val(datos.tot_otr);
+                var tot1 = parseFloat(datos.tot_int);
+                var tot2 = parseFloat(datos.tot_gas);
+                var tot3 = parseFloat(datos.tot_otr);
+                var tot = tot1+tot2+tot3;
+                $("#totaing").val(tot);
+                
+                var tote1 = parseFloat(datos.tot_pag);
+                var tote2 = parseFloat(datos.tot_pag_gas);
+                var tote3 = parseFloat(datos.tot_pag_df);
+                var tote = tote1+tote2;
+                $("#totaegr").val(tote);
             },
             error:function(){
                 alert("error");
@@ -100,7 +111,12 @@ $(document).ready(function(){
                         <tr>
                             <td>Otros Ingresos</td>
                             <td>{!! Form::number('totxotri', null, ['class' => 'form-control',"step"=>"0.01" ,"readonly"=>"true","placeholder"=>"0.00",'id'=>'totxotr']) !!}</td>   
-                            <td>0.00</td>
+                            <td>{!! Form::number('totdescf', null, ['class' => 'form-control',"step"=>"0.01" ,"readonly"=>"true","placeholder"=>"0.00",'id'=>'totdescf']) !!}</td>
+                        </tr>
+                        <tr>
+                            <td>Totales</td>
+                            <td>{!! Form::number('totaing', null, ['class' => 'form-control',"readonly"=>"true","placeholder"=>"0.00",'id'=>'totaing']) !!}</td>   
+                            <td>{!! Form::number('totaegr', null, ['class' => 'form-control',"readonly"=>"true","placeholder"=>"0.00",'id'=>'totaegr']) !!}</td>
                         </tr>
                 </tbody>    
             </table>

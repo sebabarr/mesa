@@ -212,7 +212,8 @@ class ChequesController extends Controller
         $res=DB::table('cheques')
                     ->join('clientes', 'cheques.id_cliente','=','clientes.id')
                     ->select('id_cliente', DB::raw('SUM(importe) as total_cliente'),'clientes.razonsocial',DB::raw('SUM(importe) as por_cartera'))
-                    ->where('fechavto','>=',$var2)
+                    ->where('estado','=','cartera')
+                    ->orWhere('fechavto','>=',$var2)
                     ->groupBy('id_cliente')
                     ->orderBy('total_cliente','desc')
                     ->get();

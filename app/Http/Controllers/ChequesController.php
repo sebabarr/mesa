@@ -214,18 +214,18 @@ class ChequesController extends Controller
                     ->select('id_cliente', DB::raw('SUM(importe) as total_cliente'),'clientes.razonsocial',DB::raw('SUM(importe) as por_cartera'))
                     ->where('fechavto','>=',$var2)
                     ->groupBy('id_cliente')
+                    ->orderBy('total_cliente','desc')
                     ->get();
         
         $totxclie = Collection::make($res);
-      //dd($totxclie);
+      
        
-      $totalcartera=$totxclie->sum("total_cliente");
-      $totxclie= $totxclie->each(function($item,$key) use ($totalcartera){
-          
-          $por_car=$item->total_cliente/$totalcartera;
-          $item->por_cartera = $por_car;
-          return true;
-      });
+        $totalcartera=$totxclie->sum("total_cliente");
+        $totxclie= $totxclie->each(function($item,$key) use ($totalcartera){
+                            $por_car=$item->total_cliente/$totalcartera;
+                            $item->por_cartera = $por_car;
+                            return true;
+                            });
           
       
         return \View::make('cheques.totxcliente',compact("totxclie",'totalcartera'));
@@ -234,7 +234,28 @@ class ChequesController extends Controller
     
     public function totxcuits()
     {
-        echo "llegue2";
+        $var1 = date_create(date("Y-m-d"));
+        $res=DB::table('cheques')
+                    ->join('cuits', 'cheques.id_cuit','=','cuits.id')
+                    ->select('id_cliente', DB::raw('SUM(importe) as total_cuit'),'cuits.razonsocial','cuits.numero as numcuit',DB::raw('SUM(importe) as por_cart'))
+                    ->where('estado','=','cartera')
+                    ->orWhere('fechavto','>=',$var1)
+                    ->groupBy('id_cuit')
+                    ->orderBy('total_cuit','desc')
+                    ->get();
+        
+        $totxcuit = Collection::make($res);
+      
+       
+        $totalcartera=$totxcuit->sum("total_cuit");
+        $totxcuit= $totxcuit->each(function($item,$key) use ($totalcartera){
+                            $por_car=$item->total_cuit/$totalcartera;
+                            $item->por_cart = $por_car;
+                            return true;
+                            });
+          
+      
+        return \View::make('cheques.totxcuits',compact("totxcuit",'totalcartera'));
         
     }
     

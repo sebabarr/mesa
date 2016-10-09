@@ -14,21 +14,18 @@
                     {!! Form::label('razonsocial', 'Razonsocial: ', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
                     {!! Form::text('razonsocial', null, ['class' => 'form-control', 'required' => 'required']) !!}
-                    {!! $errors->first('razonsocial', '<p class="help-block">:message</p>') !!}
                 </div>
                 </div>
                 <div class="form-group {{ $errors->has('numero') ? 'has-error' : ''}}">
                     {!! Form::label('numero', 'Numero: ', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
                     {!! Form::text('numero', null, ['class' => 'form-control']) !!}
-                    {!! $errors->first('numero', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
             <div class="form-group {{ $errors->has('limite') ? 'has-error' : ''}}">
                 {!! Form::label('limite', 'Limite: ', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
                     {!! Form::number('limite', null, ['class' => 'form-control']) !!}
-                    {!! $errors->first('limite', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
 

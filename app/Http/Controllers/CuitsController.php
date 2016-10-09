@@ -53,6 +53,7 @@ class CuitsController extends Controller
         $this->validate($request, ['razonsocial' => 'required',
                                    'numero'      => 'required|unique:cuits,numero']);
 
+        
         Cuit::create($request->all());
         
 

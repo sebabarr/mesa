@@ -94,28 +94,34 @@
             
             
             
-        <p>-----------------------------------------------------------</p>    
-        <p> Firma                Aclaracion             DNI</p>
+        <pre>------------     ----------------------     -----------------</pre>  
+        <pre>Firma                Aclaracion                  DNI</pre></br>
         
         
         
-        --------------------------------------------------------------------------------- 
-        
-        Librado en la Ciudad de Cordoba, Provincia de Cordoba, a los [fecha de hoy] 
-        Con fecha [fecha de cheque], PAGARE a Barr Sebastian Raul, D.N.I. 22.561.111, o a su orden
-        , sin protesto (Articulo 50 Decreto - Ley N° 5.965/63), la suma de pesos {{ $var_impre["impletras"]}}. El capital de este
-        pagaré devengara un interes compensatorio a una tasa del 12% anual contado desde la fecha de libramiento
-        y hasta su efectivo pago. Lugar de pago: 25 de Mayo 255 Of. 4-Ciudad de Cordoba.
-        
-        Librador:_________________________________________________
-        Domicilio del librador:__________________________________________
+        ----------------------------------------------------------------------------------------- </br>
         
         
         
+    <p>Librado en la Ciudad de Cordoba, Provincia de Cordoba, el {{ $var_impre["fecletra"] }} 
+    ,Con fecha {{ $var_impre["fecvto"]}}  PAGARE a Barr Sebastian Raul, D.N.I. 22.561.111, o a su orden
+    , sin protesto (Articulo 50 Decreto - Ley N° 5.965/63), la suma de pesos {{ $var_impre["impletras"]}}. El capital de este
+    pagaré devengara un interes compensatorio a una tasa del 12% anual contado desde la fecha de libramiento
+    y hasta su efectivo pago. Lugar de pago: 25 de Mayo 271 piso 1-Ciudad de Cordoba.</p>
         
-        ____________                ___________________                ______________
-        Firma                         Aclaracion                         DNI
+    <pre>
+    
+    Librador:_________________________________________________
         
+    
+    Domicilio del librador:__________________________________________
+        
+        
+        
+        
+    _______                    ______________                ______________
+    Firma                        Aclaracion                         DNI
+    </pre>    
         
   </body>
 </html>

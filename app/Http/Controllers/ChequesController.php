@@ -189,17 +189,26 @@ class ChequesController extends Controller
         return redirect('cheques');
     }
     
+    
+    
+        
+    
+    
      public function imprimircesion($id)
     {
         $cheque = Cheque::find($id);
         $razon = $cheque->cuits->razonsocial;
+        $nrocuit = $cheque->cuits->numero;
         $V=new EnLetras();
+        $T=new EnLetras();
         
         
         $var_impre=["nrocheque"=>$cheque->nrocheque,"imp"=>$cheque->importe,"fecvto"=>$cheque->fechavto,
-                    "cuit"=>$cheque->id_cuit,"librador"=>$razon,"banco"=>$cheque->bancos->entidad,
+                    "cuit"=>$nrocuit,"librador"=>$razon,"banco"=>$cheque->bancos->entidad,
                     "nomcli"=>$cheque->clientes->razonsocial,"dni"=>$cheque->clientes->cuit,
-                    "dire"=>$cheque->clientes->direccion,"fechahoy"=>date('d-m-Y'),"impletras"=>$V->ValorEnLetras($cheque->importe,"pesos")];
+                    "dire"=>$cheque->clientes->direccion,"fechahoy"=>date('d-m-Y'),
+                    "fecletra"=>$T->FechaenLetras(date('d-m-Y')),
+                    "impletras"=>$V->ValorEnLetras($cheque->importe,"pesos")];
         $view = \View::make('cheques.listados.cesionch', compact('var_impre'))->render();
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($view);

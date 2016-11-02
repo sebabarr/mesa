@@ -39,6 +39,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cheques<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="{{ route('cheques.index') }}">Cartera de Cheques</a></li>
+            <li><a href="{{ action('ChequesController@buscarcheque') }}">Buscar Cheque</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="{{ action('ChequesController@totxcli') }}">Totales x Cliente</a></li>
             <li><a href="{{ action('ChequesController@totxcuits') }}">Totales x Cuits</a></li>

@@ -3,16 +3,22 @@
 
 @section('contenido')
     <div class="row"></div>
-    
-        
         <div class="col-md-3">
-            <h3>Total Cartera: $ {{ number_format($tot_cartera, 2, ",", ".") }}</h3>
+            <div class="well well-sm">
+                <h5>Total Cartera</h5>
+                <h5>$ {{ number_format($tot_cartera, 2, ",", ".") }}</h5>
+            </div>    
         </div>
-        <div class="col-md-4">
-            <h3>Total Vendidos: $ {{ number_format($tot_vendido, 2, ",", ".") }}</h3>
+        <div class="col-md-3">
+            <div class="well well-sm"> 
+                <h5>Total Vendidos</h5>
+                <h5> $ {{ number_format($tot_vendido, 2, ",", ".") }}</h5>
+            </div>
         </div>
-        <div class="col-md-4">
-            <a href="{{ url('cheques/create') }}" class="btn btn-primary pull-right btn-sm">Comprar Cheque</a>
+        <div class="col-md-3">
+            <div class="well well-sm">
+                <a href="{{ url('cheques/create') }}" class="btn btn-primary">Comprar Cheque</a>
+            </div>
         </div>    
     </div>
     <div class="table">
@@ -28,6 +34,7 @@
                     <th>Acciones</th>
                 </tr>
             </thead>
+            
             <tbody>
             {{-- */$x=0;/* --}}
             @foreach($cheques as $item)

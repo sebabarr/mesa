@@ -23,7 +23,10 @@ class Chequeventa extends Model
                             'gasto','neto'];
     
     public function chequecom(){
-        return $this->belongsTo('course\cheque','id','id_cheque');
+        return $this->belongsTo('course\Cheque','id','id_cheque');
     }
-   
+    
+    public function tomador(){
+        return $this->belongsTo('course\clientes','id','id_tomador');
+    }
 }

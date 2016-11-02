@@ -25,8 +25,8 @@ class Cheque extends Model
     public function cuits(){
         return $this->belongsTo('course\Cuit','id_cuit','id');
     }
-    public function chequev(){
-        return $this->hasOne('course\Chequeven','id_cheque','id');
+    public function cheque_ven(){
+        return $this->hasOne('course\Chequeventa','id_cheque','id');
     }
     public function clientes(){
         return $this->belongsTo('course\Cliente','id_cliente','id');

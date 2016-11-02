@@ -31,6 +31,11 @@ class Cliente extends Model
     public function scopeName($query , $name){
 		if (trim($name)!=""){
 			$query->where('razonsocial','LIKE',"%$name%");
-		}	
-	}
+		}
+    }	
+	public function chequeventas(){
+	    return $this->hasMany("course\Chequeventa",'id_tomador','id');    
+	}	
+	
+	
 }

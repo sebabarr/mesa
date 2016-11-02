@@ -34,6 +34,7 @@ class ChequesController extends Controller
      */
     public function index()
     {
+        
         $cheques = Cheque::orderBy("fechavto","asc")->where("estado","cartera")->paginate(8);
         $tot_cartera=Cheque::all()->where("estado","cartera")->sum("importe");
         $vendidos=Cheque::all()->where("estado","vendido");
@@ -49,7 +50,8 @@ class ChequesController extends Controller
         $tot_vendido=$ff->sum("importe");
         return view('cheques.index', compact('cheques',"tot_cartera","tot_vendido"));
     }
- 
+    
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -274,6 +276,24 @@ class ChequesController extends Controller
     {
         
         return \View::make('cheques.tot_ie');
+    }
+    
+    public function buscarcheque(Request $request)
+    {
+        $cheques=Cheque::all();
+        
+        if (Input::get('numche')>0){
+            
+            $cheques = Cheque::all()->where("nrocheque",intval($request->numche));
+        }    
+        if ((Input::get('fechadesde'))!=null)  {
+            $cheques=DB::table('cheques')->whereBetween('fechavto',[Input::get('fechadesde'),Input::get('fechahasta')])
+                                         ->get();
+            /*$cheques=Collection::make($che);*/
+           
+        } 
+        dd($cheques);
+        return view('cheques.buscarcheque', compact('cheques'));
     }
     
     public function t_ing_eng()

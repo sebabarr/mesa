@@ -28,6 +28,8 @@ Route::get('/cheques/tot_ing_eng','ChequesController@tot_ing_eng');
 Route::get('/cheques/{id}/imprimircesion',"ChequesController@imprimircesion");
 Route::get('/bancos/imprimir','BancosController@imprimir');
 Route::get('/operacion/estadisticas','OperacionController@estadisticas');
+Route::get('/operacion/totxmon','OperacionController@totalesxmoneda');
+Route::get('/operacion/caltotmoneda','OperacionController@caltotmoneda');
 Route::get("/cheques/{id}/venta","ChequesController@venta");
 Route::post("/cheques/grabarventa",'ChequesController@grabarVenta');
 Route::get('/cheques/t_ing_eng','ChequesController@t_ing_eng');

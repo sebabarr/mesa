@@ -292,7 +292,7 @@ class ChequesController extends Controller
             /*$cheques=Collection::make($che);*/
            
         } 
-        dd($cheques);
+        //dd($cheques);
         return view('cheques.buscarcheque', compact('cheques'));
     }
     

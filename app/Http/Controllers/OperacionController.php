@@ -6,6 +6,9 @@ use course\Operacion;
 use Illuminate\Http\Request;
 use course\Cliente;
 use course\Movimiento;
+use Input;
+use Carbon\Carbon;
+use DB;
 use Illuminate\Support\Collection as Collection;
 
 class OperacionController extends Controller {
@@ -297,5 +300,79 @@ class OperacionController extends Controller {
                      ->paginate(5);
 		
 	return view('operaciones.estadisticas.ope_estadisticas',compact('totxcli'));
+	}
+	
+	public function totalesxmoneda(){
+		
+		return view('operaciones.estadisticas.totxmon');
+	}
+	
+	public function caltotmoneda(){
+		
+		$fd=Input::get("fechad");
+        $fh=Input::get("fechah");
+        
+        
+        $inter=DB::table('operaciones')
+                ->whereBetween('created_at', [$fd,$fh])
+                ->get();
+                
+        $cole=Collection::make($inter);
+    	
+    	/*$real = $oper->filter(function ($item){
+    							global $fd,$fh;
+    							if ((strtotime($item['created_at']) >= $fd) and (strtotime($item['created_at']) <= $fh)) {
+    								if ($item['moneda']='Real') {
+    									return $item;
+    								}
+    							}
+    							
+    	});
+    	
+    	$dolar = $oper->filter(function ($item){
+    							global $fd,$fh;
+    							if ((date_create($item['created_at']) >= $fd) and (date_create($item['created_at']) <= $fh)) {
+    								if ($item['moneda']='Dolar') {
+    									return $item;
+    								}
+    							}
+    							
+    	});
+    	$euro = $oper->filter(function ($item){
+    							global $fd,$fh;
+    							if ((date_create($item['created_at']) >= $fd) and (date_create($item['created_at']) <= $fh)) {
+    								if ($item['moneda']='Euro') {
+    									return $item;
+    								}
+    							}
+    							
+    	});*/
+        $dolar_com = $cole->where('moneda','Dolar')
+        				  ->where('tipo_mov','compra')	
+        				  ->sum('cantidad');
+        $dolar_ven = $cole->where('moneda','Dolar')
+        				  ->where('tipo_mov','venta')	
+        				  ->sum('cantidad');
+        $euro_com = $cole->where('moneda','Euro')
+        				  ->where('tipo_mov','compra')	
+        				  ->sum('cantidad');;
+        $euro_ven = $cole->where('moneda','Euro')
+        				  ->where('tipo_mov','venta')	
+        				  ->sum('cantidad');;
+        $real_com = $cole->where('moneda','Real')
+        				  ->where('tipo_mov','compra')	
+        				  ->sum('cantidad');;
+        $real_ven = $cole->where('moneda','Real')
+        				  ->where('tipo_mov','venta')	
+        				  ->sum('cantidad');;
+       return response()->json(['tot_compradol' => $dolar_com,
+                                'tot_ventadol' => $dolar_ven,
+                                'tot_comeuro' => $euro_com,
+                                'tot_veneuro' => $euro_ven,
+                                'tot_comreal' => $real_com,
+                                'tot_venreal' => $real_ven,
+                                 ]);
+       
+		
 	}
 }

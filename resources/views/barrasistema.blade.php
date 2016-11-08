@@ -31,6 +31,7 @@
           <ul class="dropdown-menu">
             <li><a href="{{ route('operacion.index') }}">Operaciones de Moneda</a></li>
             <li><a href="{{ action('OperacionController@estadisticas') }}">Estadisticas de Moneda</a></li>
+            <li><a href="{{ action('OperacionController@totalesxmoneda') }}">Totales de Moneda</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="{{ route('movimientos.index') }}">Movimientos de Caja</a></li>
           </ul>

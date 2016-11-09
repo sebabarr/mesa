@@ -1,5 +1,5 @@
 <?php
-
+date_default_timezone_set("America/Argentina/cordoba");
 namespace course\Http\Controllers;
 
 use course\Http\Requests;

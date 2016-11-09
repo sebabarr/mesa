@@ -43,7 +43,7 @@
                 <tr>
                     <td>{{ $x }}</td>
                     <td><a href="{{ url('cheques', $item->id) }}">{{ $item->nrocheque }}</a></td>
-                    <td>{{ money_format('%(#10n', $item->importe) }}</td>
+                    <td>{{ $item->importe) }}</td>
                     <td>{{ $item->fechavto }}</td>
                     <td>{{ $item->importe-$item->desctasa-$item->descgasto-$item->descfijo }}</td>
                     <td>{{ $item->cuits->razonsocial }}</td>

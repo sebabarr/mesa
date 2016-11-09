@@ -48,7 +48,7 @@
                     <td>{{ $item->importe-$item->desctasa-$item->descgasto-$item->descfijo }}</td>
                     <td>{{ $item->cuits->razonsocial }}</td>
                     <td>{{ $item->clientes->razonsocial }}</td>
-                    <td><a href="{{ url('cheques', $item->id) }}">{{ $item->nrocheque }}</a></td>
+                    
                     <td>
                         <a href="{{ url('cheques/' . $item->id . '/edit') }}">
                             <button type="submit" class="btn btn-primary btn-xs">Modificar</button>

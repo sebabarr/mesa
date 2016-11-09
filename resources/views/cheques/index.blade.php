@@ -29,6 +29,7 @@
                     <th>Nrocheque</th>
                     <th>Importe</th>
                     <th>F.de Vto</th>
+                    <th>Neto</th>
                     <th>Cuit</th>
                     <th>cliente</th>
                     <th>Acciones</th>
@@ -42,8 +43,9 @@
                 <tr>
                     <td>{{ $x }}</td>
                     <td><a href="{{ url('cheques', $item->id) }}">{{ $item->nrocheque }}</a></td>
-                    <td>{{ $item->importe }}</td>
+                    <td>{{ money_format('%(#10n', $item->importe) }}</td>
                     <td>{{ $item->fechavto }}</td>
+                    <td>{{ $item->importe-$item->desctasa-$item->descgasto-$item->descfijo }}</td>
                     <td>{{ $item->cuits->razonsocial }}</td>
                     <td>{{ $item->clientes->razonsocial }}</td>
                     <td>

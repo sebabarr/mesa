@@ -46,7 +46,7 @@
                     <td>{{ $item->importe }}</td>
                     <td>{{ $item->fechavto }}</td>
                     <td>{{ $item->importe-$item->desctasa-$item->descgasto-$item->descfijo }}</td>
-                    
+                    <td>{{ $item->cuits->razonsocial }}</td>
                     <td><a href="{{ url('cheques', $item->id) }}">{{ $item->nrocheque }}</a></td>
                     <td>
                         <a href="{{ url('cheques/' . $item->id . '/edit') }}">

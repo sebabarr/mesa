@@ -41,7 +41,10 @@
             @foreach($cheques as $item)
                 {{-- */$x++;/* --}}
                 <tr>
+                    <td>{{ $x }}</td>
+                    <td><a href="{{ url('cheques', $item->id) }}">{{ $item->nrocheque }}</a></td>
                     
+                   
                     <td>
                         <a href="{{ url('cheques/' . $item->id . '/edit') }}">
                             <button type="submit" class="btn btn-primary btn-xs">Modificar</button>

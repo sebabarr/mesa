@@ -1,5 +1,5 @@
 <?php
-date_default_timezone_set("America/Argentina/cordoba");
+
 namespace course\Http\Controllers;
 
 use course\Http\Requests;
@@ -18,7 +18,7 @@ use DB;
 use Input;
 use Illuminate\Support\Collection as Collection;
 use Session;
-
+date_default_timezone_set("America/Argentina/cordoba");
 
 
 class ChequesController extends Controller

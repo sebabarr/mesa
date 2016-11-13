@@ -302,7 +302,8 @@ class ChequesController extends Controller
         $fh=Input::get("fechah");
         
         $res=DB::table('cheques')
-                ->whereBetween('created_at', [$fd,$fh])
+                ->where('created_at',">=",$fd)
+                ->where('created_at',"<=",$fh)
                 ->get();
                 
         $cole=Collection::make($res);
@@ -314,7 +315,8 @@ class ChequesController extends Controller
         $tr=$cole->count();
         
         $res1=DB::table('chequeven')
-                ->whereBetween('created_at', [$fd,$fh])
+                ->where('created_at',">=",$fd)
+                ->where('created_at',"<=",$fh)
                 ->get();
                 
         $cole1=Collection::make($res1);

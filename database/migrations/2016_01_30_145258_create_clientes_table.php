@@ -23,6 +23,7 @@ class CreateClientesTable extends Migration
                 $table->decimal('tasa_desc',5,2);
                 $table->decimal('tasa_gasto',5,2);
                 $table->decimal('gasto_fijo',10,2);
+                $table->integer('ult_liqui');
                 $table->timestamps();
             });
             

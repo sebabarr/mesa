@@ -19,7 +19,7 @@ class Chequeventa extends Model
      *
      * @var array
      */
-    protected $fillable = ['id_cheque','id_tomador','fechaventa', 'tasa_descu', 'tasa_gasto', 'descuentofijo', 'descuento', 
+    protected $fillable = ['id_cheque','id_tomador','fechaventa', 'cli_liqui','tasa_descu', 'tasa_gasto', 'descuentofijo', 'descuento', 
                             'gasto','neto'];
     
     public function chequecom(){

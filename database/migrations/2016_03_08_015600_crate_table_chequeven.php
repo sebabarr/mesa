@@ -23,6 +23,7 @@ class CrateTableChequeven extends Migration
                 $table->decimal('descuento',10,2);
                 $table->decimal('gasto',10,2);
                 $table->decimal('neto',10,2);
+                $table->integer('cli_liqui');
                 $table->timestamps();
                 $table->foreign('id_cheque')
                       ->references('id')->on('cheques')

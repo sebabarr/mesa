@@ -2,9 +2,7 @@
 
 @section('contenido')
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<script type="text/javascript">
-    
-</script>
+<script type="text/javascript"></script>
 
 <script>
 

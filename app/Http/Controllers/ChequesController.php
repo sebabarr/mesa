@@ -73,26 +73,54 @@ class ChequesController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, ['nrocheque' => 'required',
-                                   'importe' => 'required', 'fechavto' => 'required', ]);
-
-        $chequeinsertado = Cheque::create($request->all());
+       /* dd($request);*/
+       $grabasen = 0;
+        for ($i = 0; $i < 4; $i++) {
+            
+            /*-----grabar cheques*/
+            if ((!empty($request->id_cuit[$i])) and (!empty($request->nrocheque[$i])) and (!empty($request->importe[$i]))) {
+                // code
+                    $chequeinsertado = new Cheque;
+                    $chequeinsertado->nrocheque = $request->nrocheque[$i];
+                    $chequeinsertado->id_banco = $request->id_banco[$i];
+                    $chequeinsertado->fechavto = $request->fechavto[$i];
+                    $chequeinsertado->id_cuit = $request->id_cuit[$i];
+                    $chequeinsertado->estado = "cartera";
+                    $chequeinsertado->id_cliente = $request->id_cliente;
+                    $chequeinsertado->desctasa = $request->desctasa[$i];
+                    $chequeinsertado->descgasto = $request->descgasto[$i];
+                    $chequeinsertado->descfijo = $request->descfijo[$i];
+                    $chequeinsertado->tasa_desc = $request->tasa_desc1;
+                    $chequeinsertado->tasa_gast = $request->tasa_gast1;
+                    $chequeinsertado->importe = $request->importe[$i];
+                    $chequeinsertado->id_cartera = 1;
+                    $chequeinsertado->save();
         
-        $clien = Cliente::findOrFail($request->id_cliente);
-        $clien->acumulado_cht = $clien->acumulado_cht + $chequeinsertado->importe;
-        $clien->save();
+                    $clien = Cliente::findOrFail($request->id_cliente);
+                    $clien->acumulado_cht = $clien->acumulado_cht + $request->importe[$i];
         
-        $movicaja = new Movicheque();
-        $neto=0;
-        $neto=$chequeinsertado->importe-$chequeinsertado->desctasa-$chequeinsertado->descgasto-$chequeinsertado->descfijo;
-        $movicaja->importe = $neto*(-1);
-        $movicaja->operacion_id = $chequeinsertado->id;
-        $movicaja->concepto_id = 6;
-        $movicaja->comentario = "compra cheque nro:".$request->nrocheque;
-        $movicaja->save();
+                    $chequeinsertado->cli_ult_liqui=$clien->ult_liqui+1;
+                    $chequeinsertado->save();
+                    
+                    $movicaja = new Movicheque();
+                    $neto=0;
+                    $neto=$request->importe[$i]-$request->desctasa[$i]-$request->descgasto[$i]-$request->descfijo[$i];
+                    $movicaja->importe = $neto*(-1);
+                    $movicaja->operacion_id = $chequeinsertado->id;
+                    $movicaja->concepto_id = 6;
+                    $movicaja->comentario = "compra cheque nro:".$request->nrocheque[$i];
+                    $movicaja->save();
+                    $grabasen = 1;
+            /*fin grabar chequeee----*/
+            }
+        }
+        if ($grabasen = 1) {
+            // code...
+            $clien->ult_liqui =$clien->ult_liqui+1;
+            $clien->save();
+            \Session::flash('message', 'Cheques Agregados!');
+        }
         
-
-        \Session::flash('message', 'Cheque Agregado!');
 
         return redirect('cheques');
     }
@@ -192,26 +220,42 @@ class ChequesController extends Controller
     }
     
     
-    
+    public function imprimirCesiones(){
+        
+        $clientes=Cliente::lists('razonsocial','id');
+        
+        return View ('cheques.impcesion',compact("clientes"));
+    }
         
     
     
-     public function imprimircesion($id)
+     public function imprimircesion(Request $request)
     {
-        $cheque = Cheque::find($id);
-        $razon = $cheque->cuits->razonsocial;
-        $nrocuit = $cheque->cuits->numero;
-        $V=new EnLetras();
-        $T=new EnLetras();
         
+        $cheques=DB::table('cheques')
+                   /* ->join('clientes', 'cheques.id_cliente','=','clientes.id')
+                    ->select('id_cliente', DB::raw('SUM(importe) as total_cliente'),'clientes.razonsocial',DB::raw('SUM(importe) as por_cartera'))*/
+                    ->where('id_cliente','=',$request->id_cliente)
+                    ->Where('cli_ult_liqui','=',$request->nro_liqui)
+                    ->get();
+        /*dd($cheques);*/
+      /*  $razon = $cheque->cuits->razonsocial;
+        $nrocuit = $cheque->cuits->numero;*/
+        $V=new EnLetras(); // importe en letras
+        $T=new EnLetras(); //la fecha en letras
         
-        $var_impre=["nrocheque"=>$cheque->nrocheque,"imp"=>$cheque->importe,"fecvto"=>$cheque->fechavto,
+        /* "nrocheque"=>$cheque->nrocheque,"imp"=>$cheque->importe,"fecvto"=>$cheque->fechavto,
                     "cuit"=>$nrocuit,"librador"=>$razon,"banco"=>$cheque->bancos->entidad,
                     "nomcli"=>$cheque->clientes->razonsocial,"dni"=>$cheque->clientes->cuit,
-                    "dire"=>$cheque->clientes->direccion,"fechahoy"=>date('d-m-Y'),
+                    "dire"=>$cheque->clientes->direccion, */
+        
+        $ncheques = Collection::make($cheques);
+        $tot_cheques = $cheques->sum('importe');
+        
+        $var_impre=["fechahoy"=>date('d-m-Y'),
                     "fecletra"=>$T->FechaenLetras(date('d-m-Y')),
                     "impletras"=>$V->ValorEnLetras($cheque->importe,"pesos")];
-        $view = \View::make('cheques.listados.cesionch', compact('var_impre'))->render();
+        $view = \View::make('cheques.listados.cesionch', compact('var_impre', 'ncheques'))->render();
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($view);
         return $pdf->stream('cheques.listados.cesionch');
@@ -289,10 +333,10 @@ class ChequesController extends Controller
         if ((Input::get('fechadesde'))!=null)  {
             $cheques=DB::table('cheques')->whereBetween('fechavto',[Input::get('fechadesde'),Input::get('fechahasta')])
                                          ->get();
-            /*$cheques=Collection::make($che);*/
+            
            
         } 
-        //dd($cheques);
+       
         return view('cheques.buscarcheque', compact('cheques'));
     }
     
@@ -334,4 +378,48 @@ class ChequesController extends Controller
                                 'tot_pag_desf'=>$tot_pag_df ]);
        
     }
+    
+    public function bussalcli(){
+        
+        $cli=Input::get("cliente");
+        
+        $cli_datos=Cliente::FindOrFail($cli);
+       
+        
+        
+        $res=DB::table('cheques')
+                ->where('fechavto',">=",date("m-d-Y"))
+                ->where('id_cliente',"=",$cli)
+                ->sum('importe');
+        
+        
+        $sal_cli_dis=$cli_datos->limite_cht-$res;
+        
+        return response()->json(['sal_disp' => $sal_cli_dis,
+                                'cli_tasa'=>$cli_datos->tasa_desc,
+                                'cli_tasag'=>$cli_datos->tasa_gasto,
+                                'cli_tasaf'=>$cli_datos->gasto_fijo
+                                
+                                ]);
+    }
+    
+    public function bussalcuit(){
+        
+        $cuit_datos=Cuit::findOrFail(Input::get("cuit"));
+        $sumacuit=DB::table('cheques')
+                ->where('fechavto',">=",date("m-d-Y"))
+                ->where('id_cuit',"=",Input::get("cuit"))
+                ->sum('importe');
+        
+        $sal_cuit_dis=$cuit_datos->limite-$sumacuit;        
+        
+        return response()->json(['sal_disp_cuit' => $sal_cuit_dis,
+                                ]);        
+        
+    }
+    
+    public function imprimircheques() {
+        
+    }
+    
 }

@@ -32,6 +32,7 @@
                     <th>Neto</th>
                     <th>Cuit</th>
                     <th>cliente</th>
+                    <th>Cesion</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -48,6 +49,7 @@
                     <td>{{ $item->importe-$item->desctasa-$item->descgasto-$item->descfijo }}</td>
                     <td>{{ $item->cuits->razonsocial }}</td>
                     <td>{{ $item->clientes->razonsocial }}</td>
+                    <td>{{ $item->cli_ult_liqui}}</td>
                     
                     <td>
                         <a href="{{ url('cheques/' . $item->id . '/edit') }}">

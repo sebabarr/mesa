@@ -28,6 +28,7 @@ class CreateChequesTable extends Migration
                 $table->decimal('descfijo',10,2);
                 $table->integer('dias')->unsigned();
                 $table->decimal('tasa_desc',5,2);
+                $table->integer('cli_ult_liqui');
                 $table->decimal('tasa_gast',5,2);
                 $table->timestamps();
             });

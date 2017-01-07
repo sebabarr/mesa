@@ -19,7 +19,7 @@ class Cheque extends Model
      *
      * @var array
      */
-    protected $fillable = ['nrocheque', 'importe', 'id_banco', 'fechavto', 'id_cuit', 'estado', 'id_cliente', 'id_cartera', 'desctasa', 
+    protected $fillable = ['nrocheque', 'importe', 'id_banco', 'fechavto', 'id_cuit', 'estado', 'id_cliente', 'cli_ult_liqui','id_cartera', 'desctasa', 
                            'descgasto', 'descfijo','tasa_desc','tasa_gast'];
     
     public function cuits(){

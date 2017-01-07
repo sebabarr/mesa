@@ -19,6 +19,7 @@ class ClienteTableSeeder extends Seeder {
                 'tasa_desc'=>$faker->randomFloat($nbMaxDecimals = 2, $min = 3, $max = 6),
                 'tasa_gasto'=>$faker->randomFloat($nbMaxDecimals = 2, $min = 1, $max = 3),
                 'gasto_fijo'=>$faker->numberBetween($min = 10, $max = 40),
+                'ult_liqui'=>0,
                 'telefono'=>$faker->phoneNumber));
                 
         }        

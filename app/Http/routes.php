@@ -21,7 +21,7 @@ Route::controllers([
 	'users'=> 'UsersController'
 ]);
 Route::get('/cheques/imprimirCesiones','ChequesController@imprimirCesiones');
-Route::get('/cheques/imprimircheques','ChequesController@imprimircheques');
+Route::get('/cheques/imprimirCheques','ChequesController@imprimirCheques');
 Route::get('/cheques/buscasaldocuit','ChequesController@bussalcuit');
 Route::get('/cheques/buscasaldo','ChequesController@bussalcli');
 Route::get('/cheques/totxclientes','ChequesController@totxcli');

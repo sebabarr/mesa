@@ -233,12 +233,13 @@ class ChequesController extends Controller
     {
         
         $cheques=DB::table('cheques')
-                   /* ->join('clientes', 'cheques.id_cliente','=','clientes.id')
-                    ->select('id_cliente', DB::raw('SUM(importe) as total_cliente'),'clientes.razonsocial',DB::raw('SUM(importe) as por_cartera'))*/
+                    ->join('cuits', 'cheques.id_cuit','=','cuits.id')
+                    ->join('bancos','cheques.id_banco','=','bancos.id')
+                    ->select('cheques.*','cuits.razonsocial','bancos.entidad')
                     ->where('id_cliente','=',$request->id_cliente)
                     ->Where('cli_ult_liqui','=',$request->nro_liqui)
                     ->get();
-        /*dd($cheques);*/
+       /*dd($cheques);*/
       /*  $razon = $cheque->cuits->razonsocial;
         $nrocuit = $cheque->cuits->numero;*/
         $V=new EnLetras(); // importe en letras
@@ -250,11 +251,16 @@ class ChequesController extends Controller
                     "dire"=>$cheque->clientes->direccion, */
         
         $ncheques = Collection::make($cheques);
-        $tot_cheques = $cheques->sum('importe');
+        $tot_cheques = $ncheques->sum('importe');
         
-        $var_impre=["fechahoy"=>date('d-m-Y'),
+        $cliente=Cliente::FindorFail($request->id_cliente);
+        
+        $var_impre=[ "dire"=>$cliente->direccion,
+                    "dni"=>$cliente->cuit,
+                    "nomcli"=>$cliente->razonsocial,
+                    "fechahoy"=>date('d-m-Y'),
                     "fecletra"=>$T->FechaenLetras(date('d-m-Y')),
-                    "impletras"=>$V->ValorEnLetras($cheque->importe,"pesos")];
+                    "impletras"=>$V->ValorEnLetras($tot_cheques,"pesos")];
         $view = \View::make('cheques.listados.cesionch', compact('var_impre', 'ncheques'))->render();
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($view);
@@ -418,7 +424,17 @@ class ChequesController extends Controller
         
     }
     
-    public function imprimircheques() {
+    public function imprimirCheques(Request $request ) {
+        
+        $cheques=DB::table('cheques')
+                    ->orderBy('fechavto')
+                    ->get();
+        $mcheques = Collection::make($cheques);
+        $view = \View::make('cheques.listados.listacheques', compact('mcheques'))->render();
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+        return $pdf->stream('cheques.listados.listacheques');
+        return view('cheques.listados.listacheques',compact('mcheques'));
         
     }
     

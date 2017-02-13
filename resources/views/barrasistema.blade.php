@@ -42,7 +42,7 @@
             <li><a href="{{ route('cheques.index') }}">Cartera de Cheques</a></li>
             <li><a href="{{ action('ChequesController@buscarcheque') }}">Buscar Cheque</a></li>
             <li><a href="{{ action('ChequesController@imprimirCesiones') }}">Imprimir Cesion</a></li>
-            <li><a href="{{ action('ChequesController@imprimircheques') }}">Impresion Cheques</a></li>
+            <li><a href="{{ action('ChequesController@imprimirCheques') }}">Impresion Cheques</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="{{ action('ChequesController@totxcli') }}">Totales x Cliente</a></li>
             <li><a href="{{ action('ChequesController@totxcuits') }}">Totales x Cuits</a></li>

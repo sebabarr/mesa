@@ -121,6 +121,7 @@ class ChequesController extends Controller
             \Session::flash('message', 'Cheques Agregados!');
         }
         
+        
 
         return redirect('cheques');
     }
@@ -235,21 +236,16 @@ class ChequesController extends Controller
         $cheques=DB::table('cheques')
                     ->join('cuits', 'cheques.id_cuit','=','cuits.id')
                     ->join('bancos','cheques.id_banco','=','bancos.id')
-                    ->select('cheques.*','cuits.razonsocial','bancos.entidad')
+                    ->select('cheques.*','cuits.razonsocial','bancos.entidad','cuits.numero')
                     ->where('id_cliente','=',$request->id_cliente)
                     ->Where('cli_ult_liqui','=',$request->nro_liqui)
                     ->get();
        /*dd($cheques);*/
-      /*  $razon = $cheque->cuits->razonsocial;
-        $nrocuit = $cheque->cuits->numero;*/
+      
         $V=new EnLetras(); // importe en letras
         $T=new EnLetras(); //la fecha en letras
         
-        /* "nrocheque"=>$cheque->nrocheque,"imp"=>$cheque->importe,"fecvto"=>$cheque->fechavto,
-                    "cuit"=>$nrocuit,"librador"=>$razon,"banco"=>$cheque->bancos->entidad,
-                    "nomcli"=>$cheque->clientes->razonsocial,"dni"=>$cheque->clientes->cuit,
-                    "dire"=>$cheque->clientes->direccion, */
-        
+       
         $ncheques = Collection::make($cheques);
         $tot_cheques = $ncheques->sum('importe');
         
@@ -423,6 +419,18 @@ class ChequesController extends Controller
                                 ]);        
         
     }
+    
+    
+    public function FiltrarCheques(Request $request){
+        
+        $clientes=Cliente::lists('razonsocial','id');
+        return View('cheques.filtrarcheques',compact('clientes'));    
+        
+        
+    }
+    
+    
+    
     
     public function imprimirCheques(Request $request ) {
         

@@ -28,7 +28,7 @@
     <main>
         <h3>CESION DE CHEQUE</h3>
         <p>Entre {{ $var_impre["nomcli"]}}, D.N.I. {{ $var_impre["dni"]}} , con domicilio en {{ $var_impre["dire"] }} de la localidad de Cordoba , en adelante
-            denominado EL CEDENTE, por una parte y Barr Sebastian Raul, 22.561.111, con domicilio en J.Jose de Urquiza 223 de la
+            denominado EL CEDENTE, por una parte y Barr Sebastian Raul, 22.561.111, con domicilio en 25 de Mayo 271 1 piso de la
             Ciudad de Cordoba, en adelante denominado EL CESIONARIO, se conviene en realizar el siguiente contrato
             de la cesion de cheque(s), conforme lo establecen las cláusulas que se disponen a continuacion:<br>
         <b>PRIMERO:OBJETO</b><br>
@@ -58,7 +58,7 @@
                         {{ $ncheque->fechavto }}
                     </td>
                     <td>
-                        {{ $ncheque->id_cuit }}
+                        {{ $ncheque->numero}}
                     </td>
                     <td>
                          {{ $ncheque->razonsocial }}

@@ -14,7 +14,7 @@
                     <th>cliente</th>
                     <th>Estado</th>
                     <th>Tomador</th>
-                    
+                    <th>Accion</th>
                 </tr>
             </thead>
             
@@ -33,6 +33,18 @@
                     <td>    
                         {!! Form::select('id_cliente', $clientes,Input::old('id_cliente'), ['class' => 'form-control']) !!}
                     </td>
+                    <td>    
+                        
+                    </td>
+                    <td>    
+                        {!! Form::select('id_tomador', $clientes,Input::old('id_tomador'), ['class' => 'form-control']) !!}
+                    </td>
+                    <td>
+                        {!! Form::open(['action'=>'ChequesController@imprimirCheques','method'=>'GET','role'=>'search']) !!}	
+	  					
+	  					<button type="submit" class="btn btn-default">Buscar</button>
+					{!! Form::close() !!}
+                    </td>>
                 </tr>
                 
             </tbody>

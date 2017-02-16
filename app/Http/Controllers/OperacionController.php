@@ -225,6 +225,7 @@ class OperacionController extends Controller {
 	public function show($id)
 	{
 		//
+		
 	}
 
 	/**

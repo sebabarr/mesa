@@ -426,11 +426,7 @@ class ChequesController extends Controller
         $clientes=Cliente::lists('razonsocial','id');
         return View('cheques.filtrarcheques',compact('clientes'));    
         
-        
     }
-    
-    
-    
     
     public function imprimirCheques(Request $request ) {
         

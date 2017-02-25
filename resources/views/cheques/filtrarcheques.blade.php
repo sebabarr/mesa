@@ -21,14 +21,15 @@
             <tbody>
                 
                 <tr>
+                    {!! Form::open(['action'=>'ChequesController@imprimirCheques','method'=>'GET']) !!}	
                     <td>    
-                        {!! Form::number('numero', null, ['class' => 'form-control',"placeholder"=>"000000",'id'=>'numche']) !!}
+                        {!! Form::number('numero', null, ['class' => 'form-control',"placeholder"=>"000000"]) !!}
                     </td> 
                     <td>    
-                        {!! Form::date('fecvto', null, ['class' => 'form-control','id'=>'fecvto']) !!}
+                        {!! Form::date('fecvto', null, ['class' => 'form-control']) !!}
                     </td>
                     <td>    
-                        {!! Form::text('cuit', null, ['class' => 'form-control','id'=>'ncuit','placeholder'=>'000000000000']) !!}
+                        {!! Form::select('cuit', $cuits,Input::old("cuit"), ['class' => 'form-control']) !!}
                     </td>
                     <td>    
                         {!! Form::select('id_cliente', $clientes,Input::old('id_cliente'), ['class' => 'form-control']) !!}
@@ -40,10 +41,9 @@
                         {!! Form::select('id_tomador', $clientes,Input::old('id_tomador'), ['class' => 'form-control']) !!}
                     </td>
                     <td>
-                        {!! Form::open(['action'=>'ChequesController@imprimirCheques','method'=>'GET','role'=>'search']) !!}	
-	  					
-	  					<button type="submit" class="btn btn-default">Buscar</button>
-					{!! Form::close() !!}
+                        
+	 	  				{!! Form::submit('Buscar') !!}
+    					{!! Form::close() !!}
                     </td>>
                 </tr>
                 

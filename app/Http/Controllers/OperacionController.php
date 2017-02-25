@@ -240,7 +240,7 @@ class OperacionController extends Controller {
 		$cliente=Cliente::lists('razonsocial','id');
 		return view('operaciones.opedit',compact('operacion','cliente'));
 	}
-
+ 
 	/**
 	 * Update the specified resource in storage.
 	 *

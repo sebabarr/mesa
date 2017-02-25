@@ -424,14 +424,18 @@ class ChequesController extends Controller
     public function FiltrarCheques(Request $request){
         
         $clientes=Cliente::lists('razonsocial','id');
-        return View('cheques.filtrarcheques',compact('clientes'));    
+        $cuits=Cuit::lists("razonsocial","id");
+        return View('cheques.filtrarcheques',compact('clientes',"cuits"));    
         
-    }
+    }    
     
     public function imprimirCheques(Request $request ) {
-        
+      // dd($request);
         $cheques=DB::table('cheques')
                     ->orderBy('fechavto')
+                    ->where('nrocheque',"=",$request->numero)
+                    ->orWhere('fechavto',"=",$request->fecvto)
+                    ->orWhere('id_cuit',"=",$request->cuit)
                     ->get();
         $mcheques = Collection::make($cheques);
         $view = \View::make('cheques.listados.listacheques', compact('mcheques'))->render();

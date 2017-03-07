@@ -73,7 +73,7 @@ class ChequesController extends Controller
      */
     public function store(Request $request)
     {
-       /* dd($request);*/
+        dd($request);
        $grabasen = 0;
         for ($i = 0; $i < 4; $i++) {
             
@@ -101,6 +101,7 @@ class ChequesController extends Controller
         
                     $chequeinsertado->cli_ult_liqui=$clien->ult_liqui+1;
                     $chequeinsertado->save();
+                    
                     
                     $movicaja = new Movicheque();
                     $neto=0;

@@ -140,7 +140,7 @@ return [
 		Collective\Html\HtmlServiceProvider::class,
 		'Barryvdh\Debugbar\ServiceProvider',
 		Barryvdh\DomPDF\ServiceProvider::class,
-	//	'Laracasts\Generators\GeneratorsServiceProvider',
+		'Laracasts\Generators\GeneratorsServiceProvider',
 		
 		
 		/*

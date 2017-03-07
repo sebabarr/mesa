@@ -73,7 +73,7 @@ class ChequesController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+       // dd($request);
        $grabasen = 0;
         for ($i = 0; $i < 4; $i++) {
             

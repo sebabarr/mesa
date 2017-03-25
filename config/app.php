@@ -139,8 +139,8 @@ return [
 		Laracasts\Flash\FlashServiceProvider::class,
 		Collective\Html\HtmlServiceProvider::class,
 		'Barryvdh\Debugbar\ServiceProvider',
-		Barryvdh\DomPDF\ServiceProvider::class,
-	//	'Laracasts\Generators\GeneratorsServiceProvider',
+		 Barryvdh\DomPDF\ServiceProvider::class,
+		'Laracasts\Generators\GeneratorsServiceProvider',
 		
 		
 		/*
@@ -151,7 +151,7 @@ return [
 		'course\Providers\ConfigServiceProvider',
 		'course\Providers\EventServiceProvider',
 		'course\Providers\RouteServiceProvider',
-	//	Laracasts\Generators\GeneratorsServiceProvider::class,
+		Laracasts\Generators\GeneratorsServiceProvider::class,
 
 	],
 

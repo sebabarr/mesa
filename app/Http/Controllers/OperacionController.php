@@ -93,15 +93,13 @@ class OperacionController extends Controller {
 			});
 			$prom_eurocompras=$nuevacolecompra->sum('cotizacion');
 			$prom_euroventas=$nuevacoleventa->sum('cotizacion');
-		
-
+	
 		//fin promedio euro
 		
 		$total_real=$real->sum("cantidad");
 		//Sacar Promedio
 			$realcompras=$real->where('tipo_mov','compra');
 			$realventas=$real->where('tipo_mov','venta');
-			
 			
 			$tot_realcompras=$realcompras->sum('cantidad');
 			$tot_realventas=abs($realventas->sum('cantidad'));
@@ -173,7 +171,6 @@ class OperacionController extends Controller {
 	 */
 	public function store(Request $request)
 	{
-		
 		$reglas=array('moneda'=>'required',
 					  'tipo_mov'=>'required',
 					  'cotizacion'=>'numeric',
@@ -320,8 +317,7 @@ class OperacionController extends Controller {
                 ->get();
                 
         $cole=Collection::make($inter);
-    	
-   
+    
         $dolar_com = $cole->where('moneda','Dolar')
         				  ->where('tipo_mov','compra')	
         				  ->sum('cantidad');

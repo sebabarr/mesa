@@ -421,7 +421,6 @@ class ChequesController extends Controller
         
     }
     
-    
     public function FiltrarCheques(Request $request){
         
         $clientes=Cliente::lists('razonsocial','id');

@@ -1,6 +1,5 @@
 
 @extends('home')
-
 @section('contenido')
     <div class='col-md-4'>
         <h1>Movimientos</h1>

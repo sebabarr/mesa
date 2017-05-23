@@ -334,10 +334,15 @@ class ChequesController extends Controller
             $cheques = Cheque::all()->where("nrocheque",intval($request->numche));
         }    
         if ((Input::get('fechadesde'))!=null)  {
-            $cheques=DB::table('cheques')->whereBetween('fechavto',[Input::get('fechadesde'),Input::get('fechahasta')])
-                                         ->get();
             
-           
+            
+            $collection = Cheque::all()->sortBy('fechavto');
+            $cheques = $collection->filter(function ($cheque) use($request) {
+            if (($cheque->fechavto >= $request->fechadesde) and ($cheque->fechavto <= $request->fechahasta)){
+                return true;
+                }
+            });
+            
         } 
        
         return view('cheques.buscarcheque', compact('cheques'));
@@ -423,22 +428,34 @@ class ChequesController extends Controller
     
     public function FiltrarCheques(Request $request){
         
-        $clientes=Cliente::lists('razonsocial','id');
-        $cuits=Cuit::lists("razonsocial","id");
+        
+        $clientes =  ['' => 'Todos...'] + Cliente::lists('razonsocial','id')->all();
+        $cuits=['' => 'Todos...']+ Cuit::lists("razonsocial","id")->all();
         return View('cheques.filtrarcheques',compact('clientes',"cuits"));    
         
     }    
     
     public function imprimirCheques(Request $request ) {
       // dd($request);
-        $cheques=DB::table('cheques')
-                    ->orderBy('fechavto')
-                    ->where('nrocheque',"=",$request->numero)
-                    ->orWhere('fechavto',"=",$request->fecvto)
-                    ->orWhere('id_cuit',"=",$request->cuit)
-                    ->get();
-        $mcheques = Collection::make($cheques);
-        $view = \View::make('cheques.listados.listacheques', compact('mcheques'))->render();
+        //$cheques=DB::table('cheques')
+        //            ->orderBy('fechavto')
+        //            ->where('nrocheque',"=",$request->numero)
+        //            ->orWhere('fechavto',"=",$request->fecvto)
+        //            ->orWhere('id_cuit',"=",$request->cuit)
+        //            ->orWhere('id_cliente','=',$request->cliente)
+        //            ->get();
+        
+        $mcheques = Cheque::all()->where("estado","cartera")
+                                 ->sortBy("fechavto");
+                                 
+        
+        //$mcheques= $mche->filter(function ($value) {
+        //        return $value > 2;
+        //        });
+        //$mcheques = Collection::make($cheques);
+        $totalcheques = $mcheques->sum("importe");
+        $totalnroche = $mcheques->count();
+        $view = \View::make('cheques.listados.listacheques', compact('mcheques',"totalcheques","totalnroche"))->render();
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($view);
         return $pdf->stream('cheques.listados.listacheques');

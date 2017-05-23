@@ -35,7 +35,7 @@
                         {{ $mcheque->fechavto }}
                     </td>
                     <td>
-                        {{ $mcheque->id_cuit }}
+                        {{ $mcheque->cuits->razonsocial }}
                     </td>
                     <td>
                          {{ $mcheque->estado }}
@@ -48,6 +48,7 @@
                 @endforeach
             </tbody>
         </table>
-    
+        Total Cheques: $ {{ $totalcheques }}
+        Total de cheques : {{ $totalnroche }}
     </body>
 </html>

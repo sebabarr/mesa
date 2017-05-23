@@ -22,9 +22,13 @@
                 </tr>
             </thead>    
             <tbody>
+                {{-- */$x=0;/* --}}
                 @foreach ($mcheques as $mcheque)
+                {{-- */$x++;/* --}}
                 <tr>
-                    
+                    <td>
+                        {{ $x }}
+                    </td>    
                     <td>
                         {{ $mcheque->nrocheque }}    
                     </td>
@@ -48,6 +52,7 @@
                 @endforeach
             </tbody>
         </table>
+        <div style="page-break-before: always;"></div>
         Total Cheques: $ {{ $totalcheques }}
         Total de cheques : {{ $totalnroche }}
     </body>

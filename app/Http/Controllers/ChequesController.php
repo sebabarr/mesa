@@ -456,11 +456,13 @@ class ChequesController extends Controller
         $totalcheques = $mcheques->sum("importe");
         $totalnroche = $mcheques->count();
         $view = \View::make('cheques.listados.listacheques', compact('mcheques',"totalcheques","totalnroche"))->render();
-        $pdf = \App::make('dompdf.wrapper');
+        $pdf = \App::make('snappy.pdf.wrapper');
         $pdf->loadHTML($view);
         return $pdf->stream('cheques.listados.listacheques');
         return view('cheques.listados.listacheques',compact('mcheques'));
         
+        
     }
+    
     
 }

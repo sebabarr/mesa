@@ -7,10 +7,12 @@
 	"require": {
 		"laravel/framework": "5.1.*",
 		"laracasts/flash": "~1.3",
-  		
+  		"barryvdh/laravel-snappy": "0.2.x",
 		"fzaninotto/faker": "^1.5",
 		"appzcoder/crud-generator": "^1.0",
 		"laravelcollective/html": "5.1.*",
+		"h4cc/wkhtmltopdf-amd64": "0.12.x",
+        "h4cc/wkhtmltoimage-amd64": "0.12.x",
 		"barryvdh/laravel-debugbar": "^2.2",
 		"barryvdh/laravel-dompdf": "0.6.*"
    		},

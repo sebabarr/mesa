@@ -140,6 +140,7 @@ return [
 		Collective\Html\HtmlServiceProvider::class,
 		'Barryvdh\Debugbar\ServiceProvider',
 		 Barryvdh\DomPDF\ServiceProvider::class,
+		 Barryvdh\Snappy\ServiceProvider::class,
 		'Laracasts\Generators\GeneratorsServiceProvider',
 		
 		
@@ -204,7 +205,9 @@ return [
       	'Html' => Collective\Html\HtmlFacade::class,
 		'Flash'     => Laracasts\Flash\Flash::class,
 		'Debugbar' => 'Barryvdh\Debugbar\Facade',
-		'PDF' => 'Barryvdh\DomPDF\Facade'
+		'PDF' => 'Barryvdh\DomPDF\Facade',
+		'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
+		'Image' => Barryvdh\Snappy\Facades\SnappyImage::class
 	],
 
 ];

@@ -15,7 +15,8 @@
         <table>
             <thead>
                 <tr>
-                    <th>Nro.CHEQUE</th>
+                    <th>Nro</th>
+                    <th>Nro.cheque</th>
                     <th>IMPORTE</th>
                     <th>FECHA Vto.</th>
                     <th>CUIT</th>
@@ -35,7 +36,7 @@
                             {{ $mcheque->nrocheque }}  
                         </td>
                         <td>
-                            {{ $mcheque->importe }}
+                            {{ money_format('%.2n',$mcheque->importe) }}
                         </td>
                         <td>
                             {{ $mcheque->fechavto }}

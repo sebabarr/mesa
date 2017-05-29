@@ -444,7 +444,7 @@ class ChequesController extends Controller
         //            ->orWhere('id_cuit',"=",$request->cuit)
         //            ->orWhere('id_cliente','=',$request->cliente)
         //            ->get();
-        
+        setlocale(LC_MONETARY,"es_ES");
         $mcheques = Cheque::all()->where("estado","cartera")
                                  ->sortBy("fechavto");
                                  

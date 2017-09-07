@@ -47,16 +47,12 @@
                         <td>
                              {{ $mcheque->estado }}
                         </td>
-                        
                     </tr>
                     
                 @endforeach
-                
             </tbody>
-          
         </table>
         Total Cheques: $ {{ $totalcheques }}
         Total de cheques : {{ $totalnroche }}
     </body>
-    
 </html>

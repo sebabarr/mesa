@@ -47,9 +47,7 @@
                         <td>
                              {{ $mcheque->estado }}
                         </td>
-                        <td>
-                             {{ $mcheque->id_banco }}
-                        </td>
+                        
                     </tr>
                     
                 @endforeach

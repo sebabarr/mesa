@@ -21,7 +21,7 @@
                     <th>FECHA Vto.</th>
                     <th>CUIT</th>
                     <th>ESTADO</th>
-                    <th>BANCO</th>
+                    
                 </tr>
             </thead>    
             <tbody style="page-break-before: always">

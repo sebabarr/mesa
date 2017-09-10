@@ -50,8 +50,7 @@ class ChequesController extends Controller
         $tot_vendido=$ff->sum("importe");
         return view('cheques.index', compact('cheques',"tot_cartera","tot_vendido"));
     }
-    
-    
+     
     /**
      * Show the form for creating a new resource.
      *
@@ -258,6 +257,7 @@ class ChequesController extends Controller
                     "fechahoy"=>date('d-m-Y'),
                     "fecletra"=>$T->FechaenLetras(date('d-m-Y')),
                     "impletras"=>$V->ValorEnLetras($tot_cheques,"pesos")];
+                    
         $view = \View::make('cheques.listados.cesionch', compact('var_impre', 'ncheques'))->render();
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($view);

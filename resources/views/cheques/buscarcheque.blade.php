@@ -33,7 +33,7 @@
                     <th>Cuit</th>
                     <th>cliente</th>
                     <th>Estado</th>
-                    <th>Tomador</th>
+                    <th>Accion</th>
                     
                 </tr>
             </thead>
@@ -50,7 +50,10 @@
                     <td>{{ $item->cuits->razonsocial }}</td>
                     <td>{{ $item->clientes->razonsocial }}</td>
                     <td>{{ $item->estado }}</td>
-                   <td>{{ $item->cheque_ven['id_tomador'] }}</td>
+                   <td><a href="{{ url('cheques/' . $item->id . '/venta') }}"> 
+                            <button type="submit" class="btn btn-primary btn-xs">Vender</button>
+                        </a>
+                    </td>
                 </tr>
             @endforeach
             </tbody>

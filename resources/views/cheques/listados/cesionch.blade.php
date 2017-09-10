@@ -52,7 +52,7 @@
                         {{ $ncheque->nrocheque }}    
                     </td>
                     <td>
-                        {{ $ncheque->importe }}
+                        $ {{ $ncheque->importe }}
                     </td>
                     <td>
                         {{ $ncheque->fechavto }}

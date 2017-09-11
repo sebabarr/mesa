@@ -449,10 +449,7 @@ class ChequesController extends Controller
                                  ->sortBy("fechavto");
                                  
         
-        //$mcheques= $mche->filter(function ($value) {
-        //        return $value > 2;
-        //        });
-        //$mcheques = Collection::make($cheques);
+        
         $totalcheques = $mcheques->sum("importe");
         $totalnroche = $mcheques->count();
         $view = \View::make('cheques.listados.listacheques', compact('mcheques',"totalcheques","totalnroche"))->render();
@@ -462,6 +459,41 @@ class ChequesController extends Controller
         return view('cheques.listados.listacheques',compact('mcheques'));
         
         
+    }
+    
+    public function CarxCliView (){
+        $clientes =  ['' => 'Todos...'] + Cliente::lists('razonsocial','id')->all();
+        
+        return View('cheques.listados.carteraxcli',compact('clientes'));    
+        
+    }
+    public function CarxCli(Request $request ) {
+        
+        /*$cheques = DB::table('cheques')
+                    ->where('estado', '=','cartera')
+                    ->where('id_cliente',$request->id_cliente)
+                    ->orderBy('fechavto')
+                    ->get();
+        
+        
+        $mcheques = Collection::make($cheques);*/
+        $cliente=$request->id_cliente;
+        $cliente=intval($cliente);
+       // dd($cliente);
+        $mcheques = Cheque::all()->where("estado","cartera")
+                                 ->where("id_cliente",$cliente)
+                                 ->sortBy("fechavto");
+                                 
+                                 
+        //dd($cheques);
+        $totalcheques = $mcheques->sum("importe");
+        $totalnroche = $mcheques->count();
+        $view = \View::make('cheques.listados.listacheques', compact('mcheques',"totalcheques","totalnroche"))->render();
+        $pdf = \App::make('snappy.pdf.wrapper');
+        $pdf->loadHTML($view);
+        return $pdf->stream('cheques.listados.listacheques');
+        return view('cheques.listados.listacheques',compact('mcheques'));
+
     }
     
     

@@ -20,6 +20,10 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 	'users'=> 'UsersController'
 ]);
+
+
+Route::get('/cheques/CarxCliView','ChequesController@CarxCliView');
+Route::get('/cheques/CarxCli','ChequesController@CarxCli');
 Route::get('/cheques/imprimirCheques','ChequesController@imprimirCheques');
 Route::get('/cheques/imprimirCesiones','ChequesController@imprimirCesiones');
 Route::get('/cheques/FiltrarCheques','ChequesController@FiltrarCheques');

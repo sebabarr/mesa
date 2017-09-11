@@ -45,6 +45,7 @@
             <li><a href="{{ action('ChequesController@FiltrarCheques') }}">Impresion Cheques</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="{{ action('ChequesController@totxcli') }}">Totales x Cliente</a></li>
+            <li><a href="{{ action('ChequesController@CarxCliView') }}">Cartera x Cliente</a></li>
             <li><a href="{{ action('ChequesController@totxcuits') }}">Totales x Cuits</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="{{ route('movicheques.index') }}">Caja Cheques</a></li>

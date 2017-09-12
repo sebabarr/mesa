@@ -436,14 +436,7 @@ class ChequesController extends Controller
     }    
     
     public function imprimirCheques(Request $request ) {
-      // dd($request);
-        //$cheques=DB::table('cheques')
-        //            ->orderBy('fechavto')
-        //            ->where('nrocheque',"=",$request->numero)
-        //            ->orWhere('fechavto',"=",$request->fecvto)
-        //            ->orWhere('id_cuit',"=",$request->cuit)
-        //            ->orWhere('id_cliente','=',$request->cliente)
-        //            ->get();
+      
         setlocale(LC_MONETARY,"es_ES");
         $mcheques = Cheque::all()->where("estado","cartera")
                                  ->sortBy("fechavto");
@@ -464,19 +457,12 @@ class ChequesController extends Controller
     public function CarxCliView (){
         $clientes =  ['' => 'Todos...'] + Cliente::lists('razonsocial','id')->all();
         
-        return View('cheques.listados.carteraxcli',compact('clientes'));    
+        return View('cheques.carteraxcli',compact('clientes'));    
         
     }
     public function CarxCli(Request $request ) {
         
-        /*$cheques = DB::table('cheques')
-                    ->where('estado', '=','cartera')
-                    ->where('id_cliente',$request->id_cliente)
-                    ->orderBy('fechavto')
-                    ->get();
         
-        
-        $mcheques = Collection::make($cheques);*/
         $cliente=$request->id_cliente;
         $cliente=intval($cliente);
        // dd($cliente);

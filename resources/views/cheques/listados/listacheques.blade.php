@@ -53,6 +53,8 @@
             </tbody>
         </table>
         Total Cheques: $ {{ $totalcheques }}
+        Total Cheques Cartera: $ {{ $totalchcar }}
+        Total Cheques Vendidos: $ {{ $totalchvend }}
         Total de cheques : {{ $totalnroche }}
     </body>
 </html>

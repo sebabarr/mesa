@@ -466,15 +466,16 @@ class ChequesController extends Controller
         $cliente=$request->id_cliente;
         $cliente=intval($cliente);
        // dd($cliente);
-        $mcheques = Cheque::all()->where("estado","cartera")
-                                 ->where("id_cliente",$cliente)
+        $mcheques = Cheque::all()->where("id_cliente",$cliente)
                                  ->sortBy("fechavto");
                                  
                                  
         //dd($cheques);
         $totalcheques = $mcheques->sum("importe");
         $totalnroche = $mcheques->count();
-        $view = \View::make('cheques.listados.listacheques', compact('mcheques',"totalcheques","totalnroche"))->render();
+        $totalchcar = $mcheques->where('estado','cartera')->sum('importe');
+        $totalchvend = $mcheques->where('estado','vendido')->sum('importe');
+        $view = \View::make('cheques.listados.listacheques', compact('mcheques',"totalchcar","totalcheques","totalnroche","totalchvend"))->render();
         $pdf = \App::make('snappy.pdf.wrapper');
         $pdf->loadHTML($view);
         return $pdf->stream('cheques.listados.listacheques');

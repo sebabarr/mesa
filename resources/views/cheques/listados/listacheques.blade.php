@@ -52,9 +52,9 @@
                 @endforeach
             </tbody>
         </table>
-        Total Cheques: $ {{ $totalcheques }}
-        Total Cheques Cartera: $ {{ $totalchcar }}
-        Total Cheques Vendidos: $ {{ $totalchvend }}
-        Total de cheques : {{ $totalnroche }}
+        <p>Total Cheques: $ {{ $totalcheques }} </p>
+        <p>Total Cheques Cartera: $ {{ $totalchcar }} </p>
+        <p>Total Cheques Vendidos: $ {{ $totalchvend }} </p>
+        <p>Total de cheques : {{ $totalnroche }} </p>
     </body>
 </html>
